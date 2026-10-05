@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { focus, GRADIENTS } from "../lib/styles";
+import { asset } from "../lib/utils";
 import { Tag, LinkOut, OwnerActions } from "./ui";
 
 function Thumb({ project }) {
@@ -7,7 +8,7 @@ function Thumb({ project }) {
   const inner =
     project.thumb && !broken ? (
       <img
-        src={project.thumb}
+        src={asset(project.thumb)}
         alt={"Preview of " + project.title}
         loading="lazy"
         onError={() => setBroken(true)}
