@@ -33,3 +33,9 @@ export const navigate = (hash) => {
   window.history.pushState(null, "", hash || window.location.pathname);
   window.dispatchEvent(new HashChangeEvent("hashchange"));
 };
+
+
+export const asset = (p) => {
+  const base = (typeof import.meta !== "undefined" && import.meta.env && import.meta.env.BASE_URL) || "/";
+  return p && p.startsWith("/") && !p.startsWith("//") ? base + p.slice(1) : p;
+};
