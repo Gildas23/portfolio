@@ -12,4 +12,7 @@ export const GRADIENTS = {
   g3: "from-emerald-500 to-teal-700",
   g4: "from-amber-500 to-orange-600",
   g5: "from-slate-500 to-slate-700",
+  g6: "from-violet-500 to-purple-700",
+  g7: "from-rose-500 to-pink-700",
+  g8: "from-cyan-500 to-blue-700",
 };

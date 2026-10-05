@@ -2,24 +2,24 @@
 // v4: @custom-variant dark (&:where(.dark, .dark *));).
 import React, { useState, useEffect, useRef } from "react";
 import { useStore } from "./store/useStore";
-import { PROFILE, SKILLS, PROJECTS, POSTS, EXPERIENCE } from "./data/content";
+import { PROFILE, SKILLS, PROJECTS, EXPERIENCE } from "./data/content";
 import { focus, linkCls, primaryBtn, outlineBtn } from "./lib/styles";
 import { Tag, Section } from "./components/ui";
 import ProjectCard from "./components/ProjectCard";
 import AddProjectForm from "./components/AddProjectForm";
-import PostItem from "./components/PostItem";
-import AddPostForm from "./components/AddPostForm";
+import BlogPage from "./components/BlogPage";
+import PostPage from "./components/PostPage";
+import { parseHash } from "./lib/utils";
 import ThemeToggle from "./components/ThemeToggle";
 
 const NAV = [["Projects", "projects"], ["Experience", "experience"], ["Blog", "blog"], ["Skills", "skills"], ["Contact", "contact"]];
 
 export default function App() {
-  const { theme, view, setView, showAll, toggleShowAll, saveError } = useStore();
+  const { theme, view, slug, showAll, toggleShowAll, saveError } = useStore();
   const saved = useStore((s) => s.projects);
-  const savedPosts = useStore((s) => s.posts);
+  const setRoute = useStore((s) => s.setRoute);
   const removeProject = useStore((s) => s.removeProject);
   const [adding, setAdding] = useState(false);
-  const [writing, setWriting] = useState(false);
   const scroller = useRef(null);
 
   // Apply the theme to <html>. The store persists it, so it survives reloads.
@@ -30,20 +30,34 @@ export default function App() {
   }, [theme]);
 
   const all = [...PROJECTS, ...saved];
-  const posts = [...POSTS, ...savedPosts].sort((a, b) => (a.date < b.date ? 1 : -1));
   const slide = (dir) => scroller.current?.scrollBy({ left: dir * 320, behavior: "smooth" });
 
+  // Keep the page in step with the URL hash (#/blog, #/blog/<slug>, #/blog?skill=<name>).
+  useEffect(() => {
+    const sync = () => {
+      const route = parseHash();
+      setRoute(route);
+      if (route.view !== "home") window.scrollTo({ top: 0 });
+    };
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
+  }, [setRoute]);
+
+  const toHome = () => {
+    window.history.pushState(null, "", window.location.pathname);
+    setRoute({ view: "home", slug: null, skill: null });
+  };
   const goHome = () => {
-    setView("home");
+    toHome();
     window.scrollTo({ top: 0 });
   };
   const goTo = (id) => {
     if (id === "blog") {
-      setView("blog");
-      window.scrollTo({ top: 0 });
+      window.location.hash = "#/blog";
       return;
     }
-    setView("home");
+    toHome();
     setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 50);
   };
 
@@ -58,7 +72,7 @@ export default function App() {
           </a>
           <ul className="flex gap-4 text-sm sm:gap-6">
             {NAV.map(([label, id]) => {
-              const current = id === "blog" && view === "blog";
+              const current = id === "blog" && view !== "home";
               return (
                 <li key={id}>
                   <a
@@ -79,21 +93,9 @@ export default function App() {
 
       <main id="top" className="mx-auto w-full max-w-3xl flex-1 px-5 lg:max-w-4xl">
         {view === "blog" ? (
-          <div className="pt-8">
-            <button onClick={goHome} className={linkCls}>Back to portfolio</button>
-            <Section id="blog" title="Blog">
-              <div className="space-y-6">
-                {posts.map((p) => (
-                  <PostItem key={p.id} post={p} canRemove={p.id.startsWith("u")} />
-                ))}
-              </div>
-              {writing ? (
-                <AddPostForm onCancel={() => setWriting(false)} />
-              ) : (
-                <button onClick={() => setWriting(true)} className={"mt-6 " + outlineBtn}>Write a post</button>
-              )}
-            </Section>
-          </div>
+          <BlogPage />
+        ) : view === "post" ? (
+          <PostPage slug={slug} />
         ) : (
           <>
             <div className="py-16 sm:py-24">

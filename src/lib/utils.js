@@ -20,3 +20,16 @@ export const fileToThumb = (file) =>
 
 export const formatDate = (d) =>
   new Date(d + "T12:00:00").toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" });
+
+// Hash routes: "#/blog", "#/blog/<slug>", "#/blog?skill=<name>". Anything else is the home page.
+export const parseHash = () => {
+  const m = window.location.hash.match(/^#\/blog(?:\/([^?/]+))?(?:\?skill=(.*))?$/);
+  if (!m) return { view: "home", slug: null, skill: null };
+  const dec = (v) => (v ? decodeURIComponent(v) : null);
+  return { view: m[1] ? "post" : "blog", slug: dec(m[1]), skill: dec(m[2]) };
+};
+
+export const navigate = (hash) => {
+  window.history.pushState(null, "", hash || window.location.pathname);
+  window.dispatchEvent(new HashChangeEvent("hashchange"));
+};

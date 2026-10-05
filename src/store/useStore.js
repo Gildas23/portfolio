@@ -35,17 +35,19 @@ export const useStore = create(
       projects: [],
       posts: [],
       // session only
-      view: "home", // "home" | "blog"
+      view: "home", // "home" | "blog" | "post"
+      slug: null,
+      skill: null,
       showAll: false,
       saveError: false,
 
       toggleTheme: () => set((s) => ({ theme: s.theme === "dark" ? "light" : "dark" })),
-      setView: (view) => set({ view }),
+      setRoute: (r) => set({ view: r.view, slug: r.slug, skill: r.skill }),
       toggleShowAll: () => set((s) => ({ showAll: !s.showAll })),
       addProject: (p) => set((s) => ({ projects: [...s.projects, p] })),
       removeProject: (id) => set((s) => ({ projects: s.projects.filter((p) => p.id !== id) })),
       addPost: (p) => set((s) => ({ posts: [...s.posts, p] })),
-      removePost: (id) => set((s) => ({ posts: s.posts.filter((p) => p.id !== id) })),
+      removePost: (id) => set((s) => ({ posts: s.posts.filter((p) => p.slug !== id) })),
     }),
     {
       name: "portfolio",

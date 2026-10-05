@@ -1,0 +1,1103 @@
+{
+  "_schema": "Each post has a unique slug, metadata, skills[], toc[], and sections[]. Skills drive the /blog?skill= filter. Sections are typed content blocks rendered by PostBody.",
+  "posts": [
+    {
+      "slug": "install-docker-complete-guide",
+      "title": "How to Install Docker: The Complete Beginner Guide",
+      "excerpt": "Docker can feel intimidating at first. Here's how I install it, verify it works, and get from zero to running containers in under 10 minutes on any OS.",
+      "category": "Docker",
+      "date": "2025-03-10",
+      "readTime": 6,
+      "featured": true,
+      "gradient": "g1",
+      "glyph": "◈",
+      "skills": ["Docker", "Linux", "System Administration"],
+      "tags": ["docker", "devops", "containers", "beginners"],
+      "toc": [
+        {
+          "id": "what-is-docker",
+          "label": "What Docker actually is"
+        },
+        {
+          "id": "install-linux",
+          "label": "Install on Linux"
+        },
+        {
+          "id": "install-mac-win",
+          "label": "Install on Mac and Windows"
+        },
+        {
+          "id": "verify",
+          "label": "Verify your install"
+        },
+        {
+          "id": "first-container",
+          "label": "Run your first container"
+        },
+        {
+          "id": "next-steps",
+          "label": "Next steps"
+        }
+      ],
+      "sections": [
+        {
+          "type": "paragraph",
+          "content": "The first time I heard about Docker I thought it was something only big companies used. Turns out it's one of the most useful tools a developer can have — on any project, any size, any team. This guide gets you from zero to running containers, no experience needed."
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "heading2",
+          "id": "what-is-docker",
+          "content": "What Docker actually is"
+        },
+        {
+          "type": "paragraph",
+          "content": "Docker lets you package an application and everything it needs to run — the code, the runtime, the libraries, the config — into a single unit called a <strong>container</strong>. That container runs the same way on your laptop, your colleague's machine, and your production server. No more \"it works on my machine\"."
+        },
+        {
+          "type": "blockquote",
+          "content": "A container is not a virtual machine. It doesn't emulate hardware. It shares the host OS kernel and starts in milliseconds instead of minutes."
+        },
+        {
+          "type": "heading2",
+          "id": "install-linux",
+          "content": "Install on Linux (Ubuntu / Debian)"
+        },
+        {
+          "type": "paragraph",
+          "content": "The cleanest way to install Docker on Ubuntu or Debian is using the official convenience script. Open your terminal and run these commands one by one:"
+        },
+        {
+          "type": "code",
+          "content": "# Remove any old versions first\nsudo apt remove docker docker-engine docker.io containerd runc\n\n# Install dependencies\nsudo apt update\nsudo apt install -y ca-certificates curl gnupg\n\n# Add Docker's official GPG key\nsudo install -m 0755 -d /etc/apt/keyrings\ncurl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg\n\n# Add the Docker repository\necho \"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null\n\n# Install Docker Engine\nsudo apt update\nsudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
+        },
+        {
+          "type": "paragraph",
+          "content": "After installing, add your user to the docker group so you don't need <code>sudo</code> every time:"
+        },
+        {
+          "type": "code",
+          "content": "sudo usermod -aG docker $USER\nnewgrp docker"
+        },
+        {
+          "type": "heading2",
+          "id": "install-mac-win",
+          "content": "Install on Mac and Windows"
+        },
+        {
+          "type": "paragraph",
+          "content": "On Mac and Windows, install <strong>Docker Desktop</strong> — it gives you Docker Engine, Docker Compose, and a GUI dashboard in one package."
+        },
+        {
+          "type": "orderedList",
+          "items": [
+            "Go to <strong>docs.docker.com/get-docker</strong> and download the installer for your OS",
+            "Run the installer and follow the prompts",
+            "Launch Docker Desktop from your Applications folder",
+            "Wait for the whale icon in your taskbar/menu bar to stop animating — that means Docker is running"
+          ]
+        },
+        {
+          "type": "heading2",
+          "id": "verify",
+          "content": "Verify your install"
+        },
+        {
+          "type": "paragraph",
+          "content": "Run this in your terminal to confirm everything is working:"
+        },
+        {
+          "type": "code",
+          "content": "docker --version\n# Docker version 25.0.3, build 4debf41\n\ndocker compose version\n# Docker Compose version v2.24.6"
+        },
+        {
+          "type": "heading2",
+          "id": "first-container",
+          "content": "Run your first container"
+        },
+        {
+          "type": "paragraph",
+          "content": "This is the moment it clicks. Run the official hello-world image:"
+        },
+        {
+          "type": "code",
+          "content": "docker run hello-world"
+        },
+        {
+          "type": "paragraph",
+          "content": "Docker will pull the image from Docker Hub, create a container, run it, print a confirmation message, and stop. The whole thing takes about 5 seconds. You just ran your first container."
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "heading2",
+          "id": "next-steps",
+          "content": "Next steps"
+        },
+        {
+          "type": "paragraph",
+          "content": "Now that Docker is installed, the next posts in this series walk through setting up a Python app, a Node.js environment, and eventually deploying a container so anyone can use it. Docker gets more powerful the more you use it — the learning curve is front-loaded, and it pays off fast."
+        }
+      ],
+      "thumbnail": "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=1200&q=80&auto=format&fit=crop"
+    },
+    {
+      "slug": "python-app-in-docker",
+      "title": "How to Run Your Python App in a Docker Container",
+      "excerpt": "Stop installing Python versions and managing virtual environments per project. Here's how I containerize any Python app and run it exactly the same everywhere.",
+      "category": "Docker",
+      "date": "2025-03-08",
+      "readTime": 7,
+      "featured": false,
+      "gradient": "g2",
+      "glyph": "⬡",
+      "skills": ["Docker", "Python", "Linux", "System Administration"],
+      "tags": ["docker", "python", "containers", "devops"],
+      "toc": [
+        {
+          "id": "why-docker-python",
+          "label": "Why Docker for Python"
+        },
+        {
+          "id": "dockerfile",
+          "label": "Writing the Dockerfile"
+        },
+        {
+          "id": "compose",
+          "label": "Adding Docker Compose"
+        },
+        {
+          "id": "hot-reload",
+          "label": "Hot reload with volumes"
+        },
+        {
+          "id": "run-it",
+          "label": "Build and run"
+        }
+      ],
+      "sections": [
+        {
+          "type": "paragraph",
+          "content": "Every Python developer has been there — spending 30 minutes debugging why an app works on one machine and not another because of a Python version mismatch or a missing package. Docker solves this permanently. Once you containerize your app, the environment is part of the code."
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "heading2",
+          "id": "why-docker-python",
+          "content": "Why Docker for Python specifically"
+        },
+        {
+          "type": "unorderedList",
+          "items": [
+            "No more <code>pyenv</code>, <code>virtualenv</code>, or <code>conda</code> conflicts between projects",
+            "Your exact Python version and packages are locked in the image",
+            "New team members clone the repo and run one command — done",
+            "Identical environment from your laptop to the server"
+          ]
+        },
+        {
+          "type": "heading2",
+          "id": "dockerfile",
+          "content": "Writing the Dockerfile"
+        },
+        {
+          "type": "paragraph",
+          "content": "Create a file named <code>Dockerfile</code> in the root of your Python project. Here's a solid starting point that works for Flask, FastAPI, Django, or any script:"
+        },
+        {
+          "type": "code",
+          "content": "# Use an official slim Python image\nFROM python:3.11-slim\n\n# Set working directory inside the container\nWORKDIR /app\n\n# Copy requirements first (Docker caches this layer)\nCOPY requirements.txt .\n\n# Install dependencies\nRUN pip install --no-cache-dir -r requirements.txt\n\n# Copy the rest of your app\nCOPY . .\n\n# Expose the port your app runs on\nEXPOSE 8000\n\n# Start the app\nCMD [\"uvicorn\", \"main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]"
+        },
+        {
+          "type": "paragraph",
+          "content": "For a Flask app, swap the last line to: <code>CMD [\"python\", \"-m\", \"flask\", \"run\", \"--host=0.0.0.0\", \"--port=8000\"]</code>. For a plain script: <code>CMD [\"python\", \"main.py\"]</code>."
+        },
+        {
+          "type": "heading2",
+          "id": "compose",
+          "content": "Adding Docker Compose"
+        },
+        {
+          "type": "paragraph",
+          "content": "Create a <code>docker-compose.yml</code> file. This is how you actually run things — it's simpler than typing long <code>docker run</code> commands every time:"
+        },
+        {
+          "type": "code",
+          "content": "services:\n  app:\n    build: .\n    ports:\n      - \"8000:8000\"\n    volumes:\n      - .:/app\n    environment:\n      - DATABASE_URL=postgresql://user:pass@db:5432/mydb\n    depends_on:\n      - db\n\n  db:\n    image: postgres:15\n    environment:\n      POSTGRES_USER: user\n      POSTGRES_PASSWORD: pass\n      POSTGRES_DB: mydb\n    volumes:\n      - pgdata:/var/lib/postgresql/data\n\nvolumes:\n  pgdata:"
+        },
+        {
+          "type": "heading2",
+          "id": "hot-reload",
+          "content": "Hot reload with volumes"
+        },
+        {
+          "type": "paragraph",
+          "content": "Notice <code>volumes: - .:/app</code> in the compose file. This mounts your local project folder inside the container in real time. When you edit a file locally, the container sees the change immediately — so if you're using FastAPI with <code>--reload</code> or Flask with debug mode, you get hot reload without rebuilding the image."
+        },
+        {
+          "type": "heading2",
+          "id": "run-it",
+          "content": "Build and run"
+        },
+        {
+          "type": "code",
+          "content": "# Build the image and start all services\ndocker compose up --build\n\n# Run in background (detached mode)\ndocker compose up -d --build\n\n# Stop everything\ndocker compose down\n\n# See logs\ndocker compose logs -f app"
+        },
+        {
+          "type": "paragraph",
+          "content": "Your app is now running at <code>http://localhost:8000</code> inside a fully isolated container. No virtual environment, no Python version drama, no missing packages. Just your app running exactly as it will in production."
+        }
+      ],
+      "thumbnail": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=1200&q=80&auto=format&fit=crop"
+    },
+    {
+      "slug": "nodejs-docker-environment",
+      "title": "How to Set Up a Node.js Docker Environment",
+      "excerpt": "The exact Dockerfile and Compose setup I use for every Node.js project — with hot reload, environment variables, and a separate dev vs prod config.",
+      "category": "Docker",
+      "date": "2025-03-06",
+      "readTime": 6,
+      "featured": false,
+      "gradient": "g3",
+      "glyph": "◎",
+      "skills": ["Docker", "Node.js", "CI/CD", "System Administration"],
+      "tags": ["docker", "nodejs", "containers", "devops"],
+      "toc": [
+        {
+          "id": "project-structure",
+          "label": "Project structure"
+        },
+        {
+          "id": "dockerfile",
+          "label": "The Dockerfile"
+        },
+        {
+          "id": "dev-compose",
+          "label": "Dev Compose config"
+        },
+        {
+          "id": "prod-compose",
+          "label": "Production Compose config"
+        },
+        {
+          "id": "scripts",
+          "label": "Useful scripts"
+        }
+      ],
+      "sections": [
+        {
+          "type": "paragraph",
+          "content": "Node.js and Docker are a natural fit — Node apps are lightweight, fast to containerize, and behave consistently across environments. This is the exact setup I use as a starting point for every Node.js project, whether it's a REST API, an Express server, or a background worker."
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "heading2",
+          "id": "project-structure",
+          "content": "Project structure"
+        },
+        {
+          "type": "code",
+          "content": "my-node-app/\n├── src/\n│   └── index.js\n├── Dockerfile\n├── Dockerfile.dev\n├── docker-compose.yml\n├── docker-compose.dev.yml\n├── .dockerignore\n├── package.json\n└── .env"
+        },
+        {
+          "type": "paragraph",
+          "content": "Always create a <code>.dockerignore</code> file to keep your image lean. At minimum it should contain:"
+        },
+        {
+          "type": "code",
+          "content": "node_modules\nnpm-debug.log\n.env\n.git\ndist"
+        },
+        {
+          "type": "heading2",
+          "id": "dockerfile",
+          "content": "The Dockerfile (production)"
+        },
+        {
+          "type": "code",
+          "content": "FROM node:20-alpine\n\n# Set working directory\nWORKDIR /app\n\n# Copy package files first (cache layer)\nCOPY package*.json .\n\n# Install production dependencies only\nRUN npm ci --omit=dev\n\n# Copy source\nCOPY . .\n\n# Expose port\nEXPOSE 3000\n\n# Start\nCMD [\"node\", \"src/index.js\"]"
+        },
+        {
+          "type": "paragraph",
+          "content": "Using <code>node:20-alpine</code> instead of <code>node:20</code> cuts your image size from ~1GB down to ~180MB. Using <code>npm ci</code> instead of <code>npm install</code> ensures reproducible installs from the lockfile."
+        },
+        {
+          "type": "heading2",
+          "id": "dev-compose",
+          "content": "Dev Compose config with hot reload"
+        },
+        {
+          "type": "code",
+          "content": "# docker-compose.dev.yml\nservices:\n  app:\n    build:\n      context: .\n      dockerfile: Dockerfile.dev\n    ports:\n      - \"3000:3000\"\n    volumes:\n      - .:/app\n      - /app/node_modules\n    environment:\n      - NODE_ENV=development\n    env_file:\n      - .env\n    command: npm run dev"
+        },
+        {
+          "type": "paragraph",
+          "content": "The trick with Node volumes is <code>- /app/node_modules</code> — this tells Docker to use the container's own <code>node_modules</code> folder rather than syncing yours from the host. Prevents conflicts between your local OS and the container OS."
+        },
+        {
+          "type": "heading2",
+          "id": "prod-compose",
+          "content": "Production Compose config"
+        },
+        {
+          "type": "code",
+          "content": "# docker-compose.yml\nservices:\n  app:\n    build: .\n    ports:\n      - \"3000:3000\"\n    restart: unless-stopped\n    env_file:\n      - .env\n    environment:\n      - NODE_ENV=production"
+        },
+        {
+          "type": "heading2",
+          "id": "scripts",
+          "content": "Useful scripts to add to package.json"
+        },
+        {
+          "type": "code",
+          "content": "\"scripts\": {\n  \"dev\":          \"nodemon src/index.js\",\n  \"docker:dev\":   \"docker compose -f docker-compose.dev.yml up --build\",\n  \"docker:prod\":  \"docker compose up --build -d\",\n  \"docker:down\":  \"docker compose down\",\n  \"docker:logs\":  \"docker compose logs -f app\"\n}"
+        },
+        {
+          "type": "paragraph",
+          "content": "With this setup, <code>npm run docker:dev</code> spins up your full dev environment with hot reload in one command. Your colleagues clone the repo, run the same command, and everything works. That's the point."
+        }
+      ],
+      "thumbnail": "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=1200&q=80&auto=format&fit=crop"
+    },
+    {
+      "slug": "deploy-docker-container-share",
+      "title": "How to Deploy a Docker Container and Share It With Everyone",
+      "excerpt": "Building an image is step one. Getting it running on a server anyone can reach is the whole game. Here's exactly how I do it.",
+      "category": "Docker",
+      "date": "2025-03-04",
+      "readTime": 8,
+      "featured": false,
+      "gradient": "g4",
+      "glyph": "✦",
+      "skills": ["Docker", "CI/CD", "Linux", "System Administration"],
+      "tags": ["docker", "deployment", "devops", "containers", "vps"],
+      "toc": [
+        {
+          "id": "push-registry",
+          "label": "Push to Docker Hub"
+        },
+        {
+          "id": "vps-setup",
+          "label": "Set up your VPS"
+        },
+        {
+          "id": "pull-run",
+          "label": "Pull and run on the server"
+        },
+        {
+          "id": "nginx",
+          "label": "Expose it with Nginx"
+        },
+        {
+          "id": "updates",
+          "label": "Deploying updates"
+        }
+      ],
+      "sections": [
+        {
+          "type": "paragraph",
+          "content": "You've built your app, it runs perfectly in Docker on your machine. Now what? This post walks through pushing your image to a registry and running it on a server so anyone with a browser can reach it — the complete path from local container to live URL."
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "heading2",
+          "id": "push-registry",
+          "content": "Step 1 — Push your image to Docker Hub"
+        },
+        {
+          "type": "paragraph",
+          "content": "Docker Hub is the default public registry — free for public images. First, create a free account at hub.docker.com, then:"
+        },
+        {
+          "type": "code",
+          "content": "# Login to Docker Hub\ndocker login\n\n# Build and tag your image\ndocker build -t yourusername/myapp:latest .\n\n# Push to the registry\ndocker push yourusername/myapp:latest"
+        },
+        {
+          "type": "paragraph",
+          "content": "Your image is now publicly available. Anyone can pull it with <code>docker pull yourusername/myapp</code>. For private images, Docker Hub offers one free private repo, or you can use GitHub Container Registry (<code>ghcr.io</code>) which is free for public repos."
+        },
+        {
+          "type": "heading2",
+          "id": "vps-setup",
+          "content": "Step 2 — Set up your VPS"
+        },
+        {
+          "type": "paragraph",
+          "content": "Any VPS works — DigitalOcean, Hetzner, Linode, whatever. Get a Ubuntu 22.04 droplet (the cheapest one is fine for most apps), SSH in, and install Docker:"
+        },
+        {
+          "type": "code",
+          "content": "# SSH into your server\nssh root@your-server-ip\n\n# Install Docker (same as before)\ncurl -fsSL https://get.docker.com | sh\n\n# Add your user to docker group\nusermod -aG docker $USER"
+        },
+        {
+          "type": "heading2",
+          "id": "pull-run",
+          "content": "Step 3 — Pull and run your container on the server"
+        },
+        {
+          "type": "code",
+          "content": "# Pull your image\ndocker pull yourusername/myapp:latest\n\n# Run it — restart always means it survives reboots\ndocker run -d \\\n  --name myapp \\\n  --restart always \\\n  -p 3000:3000 \\\n  --env-file .env \\\n  yourusername/myapp:latest\n\n# Check it's running\ndocker ps\ndocker logs myapp"
+        },
+        {
+          "type": "heading2",
+          "id": "nginx",
+          "content": "Step 4 — Expose it with Nginx and a domain"
+        },
+        {
+          "type": "paragraph",
+          "content": "Your app is running on port 3000 but you want it on a proper domain with HTTPS. Install Nginx as a reverse proxy:"
+        },
+        {
+          "type": "code",
+          "content": "sudo apt install -y nginx certbot python3-certbot-nginx\n\n# Create a site config\nsudo nano /etc/nginx/sites-available/myapp"
+        },
+        {
+          "type": "code",
+          "content": "server {\n    server_name myapp.yourdomain.com;\n\n    location / {\n        proxy_pass http://localhost:3000;\n        proxy_http_version 1.1;\n        proxy_set_header Upgrade $http_upgrade;\n        proxy_set_header Connection 'upgrade';\n        proxy_set_header Host $host;\n        proxy_cache_bypass $http_upgrade;\n    }\n}"
+        },
+        {
+          "type": "code",
+          "content": "# Enable the site\nsudo ln -s /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled/\nsudo nginx -t && sudo systemctl reload nginx\n\n# Add free HTTPS with Let's Encrypt\nsudo certbot --nginx -d myapp.yourdomain.com"
+        },
+        {
+          "type": "heading2",
+          "id": "updates",
+          "content": "Step 5 — Deploying updates"
+        },
+        {
+          "type": "paragraph",
+          "content": "Every time you want to ship a new version, the flow is:"
+        },
+        {
+          "type": "code",
+          "content": "# On your local machine\ndocker build -t yourusername/myapp:latest .\ndocker push yourusername/myapp:latest\n\n# On the server\ndocker pull yourusername/myapp:latest\ndocker stop myapp && docker rm myapp\ndocker run -d --name myapp --restart always -p 3000:3000 --env-file .env yourusername/myapp:latest"
+        },
+        {
+          "type": "paragraph",
+          "content": "That's it. Your app is live, has HTTPS, survives server reboots, and can be updated in under a minute. From here you can automate this deploy flow with a simple GitHub Actions workflow — push to main, image builds and deploys automatically."
+        }
+      ],
+      "thumbnail": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80&auto=format&fit=crop"
+    },
+    {
+      "slug": "how-to-design-a-good-api",
+      "title": "How to Design a Good API: 10 Steps I Actually Use",
+      "excerpt": "API design is one of those things that looks easy until you're six months in and everything is a mess. These are the 10 steps that keep me out of trouble.",
+      "category": "System Design",
+      "date": "2025-02-28",
+      "readTime": 10,
+      "featured": false,
+      "gradient": "g5",
+      "glyph": "◐",
+      "skills": ["REST API", "Node.js", "PostgreSQL", "System Administration"],
+      "tags": ["api", "system design", "backend", "architecture"],
+      "toc": [
+        {
+          "id": "step-1",
+          "label": "1. Design for the consumer"
+        },
+        {
+          "id": "step-2",
+          "label": "2. Resources, not actions"
+        },
+        {
+          "id": "step-3",
+          "label": "3. Version from day one"
+        },
+        {
+          "id": "step-4",
+          "label": "4. Use HTTP correctly"
+        },
+        {
+          "id": "step-5",
+          "label": "5. Consistent error shapes"
+        },
+        {
+          "id": "step-6",
+          "label": "6. Pagination on every list"
+        },
+        {
+          "id": "step-7",
+          "label": "7. Filter, sort, and search"
+        },
+        {
+          "id": "step-8",
+          "label": "8. Secure by default"
+        },
+        {
+          "id": "step-9",
+          "label": "9. Document before you build"
+        },
+        {
+          "id": "step-10",
+          "label": "10. Treat breaking changes as bugs"
+        }
+      ],
+      "sections": [
+        {
+          "type": "paragraph",
+          "content": "A bad API is one of the most expensive things a team can build. It's invisible until it isn't — and when it becomes a problem, it's usually deeply embedded in client code you don't control. These 10 steps are my checklist for every API I design, whether it's public-facing or internal."
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "heading2",
+          "id": "step-1",
+          "content": "1. Design for the consumer first"
+        },
+        {
+          "type": "paragraph",
+          "content": "Start by asking: who calls this API and what do they need? Write the requests and responses you want the consumer to make before you write a single line of server code. This is called API-first design and it prevents the most common mistake — designing an API around your database schema instead of your consumer's needs."
+        },
+        {
+          "type": "heading2",
+          "id": "step-2",
+          "content": "2. Think in resources, not actions"
+        },
+        {
+          "type": "paragraph",
+          "content": "REST APIs are built around nouns, not verbs. Your URLs should represent things, not operations."
+        },
+        {
+          "type": "unorderedList",
+          "items": [
+            "<strong>Good:</strong> <code>POST /invoices</code> to create, <code>GET /invoices/42</code> to fetch",
+            "<strong>Bad:</strong> <code>POST /createInvoice</code>, <code>GET /getInvoiceById?id=42</code>",
+            "Use HTTP methods (GET, POST, PATCH, DELETE) to express the operation — not the URL"
+          ]
+        },
+        {
+          "type": "heading2",
+          "id": "step-3",
+          "content": "3. Version from day one"
+        },
+        {
+          "type": "paragraph",
+          "content": "Put a version in your base path from the very first endpoint: <code>/api/v1/</code>. It feels unnecessary until the day you need to make a breaking change and you're glad you did. Changing an API without versioning means breaking every client that uses it."
+        },
+        {
+          "type": "heading2",
+          "id": "step-4",
+          "content": "4. Use HTTP status codes correctly"
+        },
+        {
+          "type": "unorderedList",
+          "items": [
+            "<code>200</code> — success with a body",
+            "<code>201</code> — resource created (use after POST)",
+            "<code>204</code> — success with no body (use after DELETE)",
+            "<code>400</code> — bad request (client's fault, fix your input)",
+            "<code>401</code> — not authenticated (who are you?)",
+            "<code>403</code> — not authorized (I know who you are, you can't do this)",
+            "<code>404</code> — not found",
+            "<code>409</code> — conflict (duplicate, version mismatch)",
+            "<code>500</code> — server error (your fault, not the client's)"
+          ]
+        },
+        {
+          "type": "heading2",
+          "id": "step-5",
+          "content": "5. Pick one error shape and stick to it"
+        },
+        {
+          "type": "paragraph",
+          "content": "Every error response in your API should look exactly the same. Clients shouldn't have to handle five different error formats. Pick a shape and enforce it everywhere:"
+        },
+        {
+          "type": "code",
+          "content": "{\n  \"error\": {\n    \"code\":    \"VALIDATION_ERROR\",\n    \"message\": \"title is required\",\n    \"fields\":  { \"title\": \"must not be empty\" }\n  }\n}"
+        },
+        {
+          "type": "heading2",
+          "id": "step-6",
+          "content": "6. Paginate every list endpoint"
+        },
+        {
+          "type": "paragraph",
+          "content": "Never return an unbounded list. Every endpoint that returns a collection needs pagination from day one — you will never regret adding it early, and you will always regret not having it. Use cursor-based pagination for large datasets, offset-based for simple cases:"
+        },
+        {
+          "type": "code",
+          "content": "GET /api/v1/posts?page=2&limit=20\n\n{\n  \"data\": [...],\n  \"meta\": {\n    \"page\":  2,\n    \"limit\": 20,\n    \"total\": 143,\n    \"pages\": 8\n  }\n}"
+        },
+        {
+          "type": "heading2",
+          "id": "step-7",
+          "content": "7. Support filtering, sorting, and search from the start"
+        },
+        {
+          "type": "paragraph",
+          "content": "Build <code>?filter[status]=active</code>, <code>?sort=-createdAt</code>, and <code>?search=keyword</code> into your list endpoints. Clients will always need these. Adding them later means deprecating old endpoints or breaking existing consumers."
+        },
+        {
+          "type": "heading2",
+          "id": "step-8",
+          "content": "8. Secure by default"
+        },
+        {
+          "type": "unorderedList",
+          "items": [
+            "Every endpoint should require authentication unless explicitly public",
+            "Use short-lived JWT access tokens + refresh token rotation",
+            "Rate limit every endpoint — even internal ones",
+            "Validate and sanitize every input, even fields you don't use",
+            "Never expose internal IDs — use UUIDs or slugs in URLs"
+          ]
+        },
+        {
+          "type": "heading2",
+          "id": "step-9",
+          "content": "9. Write the documentation before you build"
+        },
+        {
+          "type": "paragraph",
+          "content": "Write your OpenAPI spec (or at minimum a README with example requests and responses) before you write the implementation. This forces you to think through the design first, catches ambiguities before they become bugs, and gives your team something to review and align on. I use this as a contract between me and whoever will consume the API."
+        },
+        {
+          "type": "heading2",
+          "id": "step-10",
+          "content": "10. Treat breaking changes like bugs"
+        },
+        {
+          "type": "paragraph",
+          "content": "Removing a field, changing a field type, or altering a status code meaning are all breaking changes. Treat them with the same seriousness as a production bug. Add a deprecation warning in response headers before removing anything, give consumers a migration period, and never break the contract without a version bump. Your API is a promise."
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "blockquote",
+          "content": "A good API makes the right thing easy and the wrong thing hard. Everything else is details."
+        }
+      ],
+      "thumbnail": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&q=80&auto=format&fit=crop"
+    },
+    {
+      "slug": "setup-kubernetes-k8s",
+      "title": "How to Set Up and Install Kubernetes (k8s) Locally",
+      "excerpt": "Kubernetes looks terrifying until you run it yourself. Here's how I go from zero to a working local cluster using minikube — with a real app deployed on it.",
+      "category": "System Design",
+      "date": "2025-02-20",
+      "readTime": 9,
+      "featured": false,
+      "gradient": "g6",
+      "glyph": "⬡",
+      "skills": ["Docker", "CI/CD", "Linux", "System Administration"],
+      "tags": ["kubernetes", "k8s", "devops", "containers", "infrastructure"],
+      "toc": [
+        {
+          "id": "what-is-k8s",
+          "label": "What Kubernetes actually does"
+        },
+        {
+          "id": "install",
+          "label": "Install minikube and kubectl"
+        },
+        {
+          "id": "first-cluster",
+          "label": "Start your first cluster"
+        },
+        {
+          "id": "deploy-app",
+          "label": "Deploy a real app"
+        },
+        {
+          "id": "expose",
+          "label": "Expose it as a service"
+        },
+        {
+          "id": "key-commands",
+          "label": "Commands you'll actually use"
+        }
+      ],
+      "sections": [
+        {
+          "type": "paragraph",
+          "content": "Kubernetes (k8s) has a reputation for being complicated. That reputation is partly deserved — it's a powerful system designed for large-scale production workloads. But you don't need a cluster of 50 nodes to learn it. Minikube runs a full Kubernetes cluster on your laptop, and once you've deployed one app yourself, the whole thing clicks into place."
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "heading2",
+          "id": "what-is-k8s",
+          "content": "What Kubernetes actually does"
+        },
+        {
+          "type": "paragraph",
+          "content": "Docker runs a single container on a single machine. Kubernetes orchestrates many containers across many machines — automatically deciding where to run them, restarting them when they crash, scaling them up under load, and routing traffic between them. Think of it as Docker with a brain."
+        },
+        {
+          "type": "blockquote",
+          "content": "Kubernetes doesn't replace Docker. Every container in a Kubernetes cluster is still a Docker container. K8s is the system that manages and coordinates them."
+        },
+        {
+          "type": "heading2",
+          "id": "install",
+          "content": "Install minikube and kubectl"
+        },
+        {
+          "type": "paragraph",
+          "content": "You need two tools: <code>minikube</code> (runs the local cluster) and <code>kubectl</code> (the CLI you use to talk to any cluster)."
+        },
+        {
+          "type": "code",
+          "content": "# Install kubectl (Linux)\ncurl -LO \"https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl\"\nsudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl\n\n# Install minikube (Linux)\ncurl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64\nsudo install minikube-linux-amd64 /usr/local/bin/minikube\n\n# Verify both\nkubectl version --client\nminikube version"
+        },
+        {
+          "type": "paragraph",
+          "content": "On Mac: <code>brew install kubectl minikube</code>. On Windows: use the installers from the official Kubernetes docs."
+        },
+        {
+          "type": "heading2",
+          "id": "first-cluster",
+          "content": "Start your first cluster"
+        },
+        {
+          "type": "code",
+          "content": "# Start a local cluster using Docker as the driver\nminikube start --driver=docker\n\n# Check it's running\nkubectl get nodes\n# NAME       STATUS   ROLES           AGE   VERSION\n# minikube   Ready    control-plane   30s   v1.29.0\n\n# Open the Kubernetes dashboard in your browser\nminikube dashboard"
+        },
+        {
+          "type": "heading2",
+          "id": "deploy-app",
+          "content": "Deploy a real app"
+        },
+        {
+          "type": "paragraph",
+          "content": "Create a <code>deployment.yml</code> file — this tells Kubernetes what to run and how many copies to keep alive:"
+        },
+        {
+          "type": "code",
+          "content": "apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: myapp\nspec:\n  replicas: 2\n  selector:\n    matchLabels:\n      app: myapp\n  template:\n    metadata:\n      labels:\n        app: myapp\n    spec:\n      containers:\n      - name: myapp\n        image: yourusername/myapp:latest\n        ports:\n        - containerPort: 3000"
+        },
+        {
+          "type": "code",
+          "content": "# Apply the deployment\nkubectl apply -f deployment.yml\n\n# Watch the pods come up\nkubectl get pods -w\n# NAME                     READY   STATUS    RESTARTS   AGE\n# myapp-7d6b9c8f4-xk2p9   1/1     Running   0          15s\n# myapp-7d6b9c8f4-mn8qr   1/1     Running   0          15s"
+        },
+        {
+          "type": "heading2",
+          "id": "expose",
+          "content": "Expose it as a service"
+        },
+        {
+          "type": "code",
+          "content": "# Create a service to expose the deployment\nkubectl expose deployment myapp --type=NodePort --port=3000\n\n# Get the URL minikube assigns it\nminikube service myapp --url\n# http://192.168.49.2:31245  ← open this in your browser"
+        },
+        {
+          "type": "heading2",
+          "id": "key-commands",
+          "content": "Commands you'll actually use every day"
+        },
+        {
+          "type": "code",
+          "content": "kubectl get pods                    # list all running pods\nkubectl get services                # list all services\nkubectl describe pod <pod-name>     # debug a specific pod\nkubectl logs <pod-name>             # see pod logs\nkubectl logs -f <pod-name>          # stream logs live\nkubectl exec -it <pod-name> -- sh   # shell into a running pod\nkubectl delete -f deployment.yml    # tear everything down\nminikube stop                       # stop the cluster\nminikube delete                     # delete the cluster completely"
+        },
+        {
+          "type": "paragraph",
+          "content": "From here the natural next steps are ConfigMaps and Secrets for environment variables, Ingress for routing multiple services through one domain, and Helm for packaging and deploying complex applications. But this foundation — deploy, expose, inspect — covers 80% of what you do day to day."
+        }
+      ],
+      "thumbnail": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80&auto=format&fit=crop"
+    },
+    {
+      "slug": "setup-ntfy-notifications",
+      "title": "How to Set Up ntfy for Free and Get Notified on Your Phone From Your PC",
+      "excerpt": "ntfy is a dead-simple self-hosted notification service. I use it to get alerts from servers, scripts, and backups straight to my phone — no paid service, no account required.",
+      "category": "Tools",
+      "date": "2025-02-10",
+      "readTime": 5,
+      "featured": false,
+      "gradient": "g7",
+      "glyph": "✦",
+      "skills": ["Linux", "Docker", "System Administration"],
+      "tags": ["ntfy", "notifications", "self-hosted", "linux", "tools"],
+      "toc": [
+        {
+          "id": "what-is-ntfy",
+          "label": "What ntfy is"
+        },
+        {
+          "id": "phone-app",
+          "label": "Set up the phone app"
+        },
+        {
+          "id": "send-from-pc",
+          "label": "Send a notification from your PC"
+        },
+        {
+          "id": "self-host",
+          "label": "Self-host with Docker"
+        },
+        {
+          "id": "use-cases",
+          "label": "Real use cases"
+        }
+      ],
+      "sections": [
+        {
+          "type": "paragraph",
+          "content": "I run a lot of scripts and automated jobs — backups, deployments, monitoring checks. For the longest time I had no idea when they finished or failed unless I was watching the terminal. Then I found ntfy. Now my phone buzzes when a backup completes, when a deploy fails, or when a server is running low on disk. Setup took 10 minutes."
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "heading2",
+          "id": "what-is-ntfy",
+          "content": "What ntfy is"
+        },
+        {
+          "type": "paragraph",
+          "content": "<strong>ntfy</strong> (notify) is an open-source push notification service. You send an HTTP request to a topic URL, and everyone subscribed to that topic gets a notification. No accounts, no API keys, no SDK. Just a <code>curl</code> command. You can use the free public server at <code>ntfy.sh</code> or self-host your own."
+        },
+        {
+          "type": "heading2",
+          "id": "phone-app",
+          "content": "Step 1 — Set up the phone app"
+        },
+        {
+          "type": "orderedList",
+          "items": [
+            "Install the <strong>ntfy app</strong> from the App Store or Google Play — it's free and open source",
+            "Open the app and tap the <strong>+</strong> button to subscribe to a topic",
+            "Enter a topic name — make it something unique like <code>mygildas-alerts</code> (anyone who knows the name can send to it, so don't use something obvious)",
+            "Tap Subscribe — you're now listening for notifications on that topic"
+          ]
+        },
+        {
+          "type": "heading2",
+          "id": "send-from-pc",
+          "content": "Step 2 — Send your first notification from your PC"
+        },
+        {
+          "type": "paragraph",
+          "content": "Open a terminal on your computer and run this one line:"
+        },
+        {
+          "type": "code",
+          "content": "curl -d \"Backup completed successfully\" ntfy.sh/mygildas-alerts"
+        },
+        {
+          "type": "paragraph",
+          "content": "Your phone should buzz within a second. That's it. Now you can put that line anywhere — at the end of a backup script, after a deployment, in a cron job."
+        },
+        {
+          "type": "paragraph",
+          "content": "You can also add a title, priority, and emoji:"
+        },
+        {
+          "type": "code",
+          "content": "curl \\\n  -H \"Title: Deploy Complete\" \\\n  -H \"Priority: high\" \\\n  -H \"Tags: white_check_mark\" \\\n  -d \"Production deployed successfully — v2.4.1\" \\\n  ntfy.sh/mygildas-alerts"
+        },
+        {
+          "type": "heading2",
+          "id": "self-host",
+          "content": "Step 3 — Self-host with Docker (optional but recommended)"
+        },
+        {
+          "type": "paragraph",
+          "content": "The public ntfy.sh server is convenient but your topics are public by default. For private notifications, run your own server — it takes 2 minutes with Docker:"
+        },
+        {
+          "type": "code",
+          "content": "# docker-compose.yml\nservices:\n  ntfy:\n    image: binwiederhier/ntfy\n    command: serve\n    ports:\n      - \"8080:80\"\n    volumes:\n      - ntfy-cache:/var/cache/ntfy\n      - ntfy-etc:/etc/ntfy\n    restart: unless-stopped\n\nvolumes:\n  ntfy-cache:\n  ntfy-etc:"
+        },
+        {
+          "type": "code",
+          "content": "docker compose up -d\n\n# Now send to your own server\ncurl -d \"Hello from self-hosted ntfy\" http://localhost:8080/mygildas-alerts"
+        },
+        {
+          "type": "paragraph",
+          "content": "In the ntfy phone app, go to Settings → Default server and point it at your server's IP or domain. Now all your topics are private."
+        },
+        {
+          "type": "heading2",
+          "id": "use-cases",
+          "content": "Real use cases from my setup"
+        },
+        {
+          "type": "unorderedList",
+          "items": [
+            "<strong>Backup completion</strong> — <code>restic backup /data && curl -d \"Backup done\" ntfy.sh/mytopic</code>",
+            "<strong>Failed cron jobs</strong> — wrap any cron job in a script that sends a failure notification if the exit code isn't 0",
+            "<strong>Deployment status</strong> — last step in every CI/CD pipeline sends a pass or fail notification",
+            "<strong>Disk space warnings</strong> — a cron job that checks <code>df -h</code> every hour and notifies if any partition is over 85%",
+            "<strong>Script done</strong> — any long-running process: <code>python train.py && curl -d \"Training complete\" ntfy.sh/mytopic</code>"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "ntfy is one of those tools where once you start using it you can't imagine going back. It takes the \"I wonder if that finished\" anxiety out of running long processes and background jobs. Free, open source, no accounts, no limits on self-hosted. Highly recommend."
+        }
+      ],
+      "thumbnail": "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1200&q=80&auto=format&fit=crop"
+    },
+    {
+      "slug": "run-llm-docker-ollama",
+      "title": "How to Run an LLM Locally With Ollama in a Docker Container",
+      "excerpt": "You don't need a cloud API to run a large language model. Here's how I run Llama, Mistral, and others locally using Ollama in Docker — private, free, and surprisingly fast.",
+      "category": "Docker",
+      "date": "2025-02-05",
+      "readTime": 8,
+      "featured": false,
+      "gradient": "g8",
+      "glyph": "◎",
+      "skills": ["Docker", "Linux", "Python", "System Administration"],
+      "tags": ["llm", "ollama", "ai", "docker", "self-hosted", "local-ai"],
+      "toc": [
+        {
+          "id": "what-is-ollama",
+          "label": "What Ollama is"
+        },
+        {
+          "id": "run-docker",
+          "label": "Run Ollama in Docker"
+        },
+        {
+          "id": "pull-model",
+          "label": "Pull and run a model"
+        },
+        {
+          "id": "api",
+          "label": "Use the REST API"
+        },
+        {
+          "id": "python",
+          "label": "Call it from Python"
+        },
+        {
+          "id": "gpu",
+          "label": "Enable GPU acceleration"
+        }
+      ],
+      "sections": [
+        {
+          "type": "paragraph",
+          "content": "Running your own LLM locally used to require a PhD in MLOps. Ollama changed that. It's a tool that makes downloading and running open-source language models as simple as <code>docker run</code> and <code>ollama pull llama3</code>. Your data stays on your machine, there's no API bill, and the models are genuinely useful."
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "heading2",
+          "id": "what-is-ollama",
+          "content": "What Ollama is"
+        },
+        {
+          "type": "paragraph",
+          "content": "Ollama is an open-source tool that packages LLM inference into a simple server with a REST API. It handles downloading model weights, loading them into memory, and serving a ChatGPT-style API on localhost. You interact with it exactly like you would the OpenAI API — just pointing at <code>http://localhost:11434</code> instead."
+        },
+        {
+          "type": "paragraph",
+          "content": "Supported models include <strong>Llama 3</strong>, <strong>Mistral</strong>, <strong>Gemma</strong>, <strong>Phi-3</strong>, <strong>CodeLlama</strong>, and dozens more. For most tasks a 7B or 8B parameter model running on CPU is genuinely useful — code completion, summarization, Q&A, writing help."
+        },
+        {
+          "type": "heading2",
+          "id": "run-docker",
+          "content": "Run Ollama in Docker"
+        },
+        {
+          "type": "paragraph",
+          "content": "The easiest way to run Ollama is with Docker Compose. Create a <code>docker-compose.yml</code>:"
+        },
+        {
+          "type": "code",
+          "content": "services:\n  ollama:\n    image: ollama/ollama\n    container_name: ollama\n    ports:\n      - \"11434:11434\"\n    volumes:\n      - ollama-models:/root/.ollama\n    restart: unless-stopped\n\nvolumes:\n  ollama-models:  # persists downloaded models between restarts"
+        },
+        {
+          "type": "code",
+          "content": "docker compose up -d\n\n# Verify it's running\ncurl http://localhost:11434\n# Ollama is running"
+        },
+        {
+          "type": "heading2",
+          "id": "pull-model",
+          "content": "Pull and run a model"
+        },
+        {
+          "type": "paragraph",
+          "content": "Pull a model the same way you pull a Docker image:"
+        },
+        {
+          "type": "code",
+          "content": "# Pull Llama 3 (8B — ~4.7GB download)\ndocker exec -it ollama ollama pull llama3\n\n# Pull Mistral (7B — ~4.1GB)\ndocker exec -it ollama ollama pull mistral\n\n# Pull a smaller model for slower machines (Phi-3 mini — ~2.3GB)\ndocker exec -it ollama ollama pull phi3:mini\n\n# List downloaded models\ndocker exec -it ollama ollama list\n\n# Chat with a model directly in the terminal\ndocker exec -it ollama ollama run llama3"
+        },
+        {
+          "type": "paragraph",
+          "content": "The first pull takes a few minutes depending on your connection. After that, the model is cached in the Docker volume and loads in seconds."
+        },
+        {
+          "type": "heading2",
+          "id": "api",
+          "content": "Use the REST API"
+        },
+        {
+          "type": "paragraph",
+          "content": "Ollama exposes an OpenAI-compatible REST API on port 11434. You can call it with curl:"
+        },
+        {
+          "type": "code",
+          "content": "# Generate a response\ncurl http://localhost:11434/api/generate \\\n  -d '{\n    \"model\":  \"llama3\",\n    \"prompt\": \"Explain Docker in one sentence.\",\n    \"stream\": false\n  }'"
+        },
+        {
+          "type": "code",
+          "content": "# Chat completions (OpenAI-compatible format)\ncurl http://localhost:11434/v1/chat/completions \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"model\": \"llama3\",\n    \"messages\": [\n      { \"role\": \"user\", \"content\": \"Write a Python function to reverse a string\" }\n    ]\n  }'"
+        },
+        {
+          "type": "heading2",
+          "id": "python",
+          "content": "Call it from Python"
+        },
+        {
+          "type": "paragraph",
+          "content": "Because Ollama is OpenAI-compatible, you can use the official OpenAI Python library pointed at localhost — no API key needed:"
+        },
+        {
+          "type": "code",
+          "content": "pip install openai"
+        },
+        {
+          "type": "code",
+          "content": "from openai import OpenAI\n\nclient = OpenAI(\n    base_url='http://localhost:11434/v1',\n    api_key='ollama',  # required by the library but ignored by Ollama\n)\n\nresponse = client.chat.completions.create(\n    model='llama3',\n    messages=[\n        {'role': 'system', 'content': 'You are a helpful coding assistant.'},\n        {'role': 'user',   'content': 'Write a FastAPI endpoint that returns a list of users'}\n    ]\n)\n\nprint(response.choices[0].message.content)"
+        },
+        {
+          "type": "paragraph",
+          "content": "This means any code you've written against the OpenAI API can switch to a local model by changing one URL and one API key. Useful for development and testing without burning API credits."
+        },
+        {
+          "type": "heading2",
+          "id": "gpu",
+          "content": "Enable GPU acceleration (optional)"
+        },
+        {
+          "type": "paragraph",
+          "content": "If you have an NVIDIA GPU, you can make inference significantly faster by passing the GPU to the container. First install the NVIDIA Container Toolkit, then update your compose file:"
+        },
+        {
+          "type": "code",
+          "content": "services:\n  ollama:\n    image: ollama/ollama\n    ports:\n      - \"11434:11434\"\n    volumes:\n      - ollama-models:/root/.ollama\n    deploy:\n      resources:\n        reservations:\n          devices:\n            - driver: nvidia\n              count: all\n              capabilities: [gpu]\n    restart: unless-stopped\n\nvolumes:\n  ollama-models:"
+        },
+        {
+          "type": "paragraph",
+          "content": "With a GPU, a 7B model goes from ~10 tokens/second on CPU to ~60-80 tokens/second — the difference between sluggish and genuinely fast. Even without a GPU though, the smaller models like Phi-3 mini are fast enough for real use on a modern laptop."
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "blockquote",
+          "content": "Running your own LLM means your data never leaves your machine. For anything involving sensitive code, client data, or private documents — that's not a nice-to-have, it's a requirement."
+        }
+      ],
+      "thumbnail": "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=80&auto=format&fit=crop"
+    }
+  ]
+}

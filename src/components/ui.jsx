@@ -45,7 +45,7 @@ export function OwnerActions({ item, onRemove, strip }) {
       <button onClick={copy} className={"ml-auto " + quietBtn}>
         {copied ? "Copied" : "Copy as code"}
       </button>
-      <button onClick={() => onRemove(item.id)} className="text-sm text-red-600 underline-offset-4 hover:underline dark:text-red-400">
+      <button onClick={() => onRemove(item.slug ?? item.id)} className="text-sm text-red-600 underline-offset-4 hover:underline dark:text-red-400">
         Remove
       </button>
     </>

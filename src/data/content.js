@@ -85,18 +85,6 @@ export const PROJECTS = [
   },
 ];
 
-// Permanent posts. Separate paragraphs in "body" with a blank line.
-export const POSTS = [
-  {
-    id: "b1",
-    title: "Welcome to my blog",
-    date: "2026-10-05",
-    summary: "What I plan to write about here, and why.",
-    body: "I am a full-stack developer, and this is where I will share what I learn while building and running web applications.\n\nExpect short, practical notes on APIs, deployments, debugging production problems, and working with AI tools.",
-    tags: ["Introduction"],
-  },
-];
-
 export const EXPERIENCE = [
   {
     role: "Software Engineer",
