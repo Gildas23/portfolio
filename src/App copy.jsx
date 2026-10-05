@@ -902,10 +902,10 @@ export default function App() {
               )}
               {adding ? (
                 <AddProjectForm onCancel={() => setAdding(false)} />
-              ) : (
+              ) :  (
                 <button
                   onClick={() => setAdding(true)}
-                  className={"mt-6 " + outlineBtn}
+                  className={"mt-6 " + outlineBtn + }
                 >
                   Add a project
                 </button>
