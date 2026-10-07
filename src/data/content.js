@@ -93,7 +93,7 @@ export const PROJECTS = [
     gradient: "g7",
     glyph: "✚",
     stack: ["Vercel"],
-    link: "https://open-pharmacy-git-main-gildas-projects-6b98c95c.vercel.app/",
+    link: "https://open-pharmacy-git-main-gildas-projects-6b98c95c.vercel.app/pharmacies",
     thumb: "/projects/thumbnails/open-pharmacy.png",
     status: "Live product",
     role: "",
