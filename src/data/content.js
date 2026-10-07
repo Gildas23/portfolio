@@ -6,8 +6,10 @@ export const PROFILE = {
   email: "gildassob@gmail.com",
   linkedin: "https://www.linkedin.com/in/gildas-chatue",
   github: "https://github.com/Gildas23",
+  contactNote: " I'm fluent in English and French, so feel free to get in touch in either.",
+  // contactNoteFr: "Vous pouvez m'écrire en français ou en anglais, je suis à l'aise dans les deux langues.",
   summary:
-    "I build and support production web applications and APIs. Over 4 years I have worked across React, Node.js, Java and PHP, deployed on AWS, and kept those systems running. I work well with support, sales and operations teams, and I am fluent in English and French.",
+    "I'm a software engineer who enjoys turning ideas into reliable web apps and APIs. Over 4 years I've worked with React, Node.js and Java, shipped to AWS, automated releases, and stayed on to support what I built, whether it was a small feature or a large update.",
 };
 
 export const SKILLS = [

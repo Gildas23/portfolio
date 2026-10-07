@@ -123,6 +123,9 @@ export default function App() {
               </p>
               <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight text-stone-900 sm:text-5xl dark:text-stone-50">{PROFILE.name}</h1>
               <p className="mt-6 max-w-xl text-lg text-stone-600 dark:text-stone-400">{PROFILE.summary}</p>
+              <p className="mt-4 max-w-xl text-stone-600 dark:text-stone-400">
+                {PROFILE.contactNote} <span lang="fr">{PROFILE.contactNoteFr}</span>
+              </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a href={"mailto:" + PROFILE.email} className={primaryBtn}>Email me</a>
                 <a href={PROFILE.github} target="_blank" rel="noreferrer" className={outlineBtn}>GitHub</a>
