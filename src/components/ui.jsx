@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useStore } from "../store/useStore";
 import { linkCls, quietBtn, primaryBtn, outlineBtn } from "../lib/styles";
 
 export const Tag = ({ children }) => (
@@ -28,6 +29,7 @@ export const Field = ({ label, children, className = "" }) => (
 
 // "Copy as code" + "Remove" for items the visitor added in this browser.
 export function OwnerActions({ item, onRemove, strip }) {
+  const editMode = useStore((s) => s.editMode);
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     // Uploaded images are too large to paste as code, so they are left out.
@@ -40,6 +42,7 @@ export function OwnerActions({ item, onRemove, strip }) {
       setCopied(false);
     }
   };
+  if (!editMode) return null;
   return (
     <>
       <button onClick={copy} className={"ml-auto " + quietBtn}>

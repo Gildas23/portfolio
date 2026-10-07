@@ -1,6 +1,6 @@
 /* ============ EDIT YOUR CONTENT HERE ============ */
 export const PROFILE = {
-  name: "Gildas Gamaliel Chatue Sobgoui",
+  name: "Gildas Chatue",
   title: "Full-stack software engineer",
   location: "Ottawa, Ontario",
   email: "gildassob@gmail.com",
@@ -21,53 +21,109 @@ export const SKILLS = [
 ];
 
 // Permanent projects. Thumbnails live in public/projects/thumbnails/.
-// "gradient" (g1-g5) and "glyph" are the fallback shown when a thumbnail is missing.
+// "gradient" (g1-g8) and "glyph" are the fallback shown when a thumbnail is missing.
+// Optional detail-page fields: status, role, overview (blank line = new paragraph),
+// highlights[], techNotes[[name, what it does here]], why. Empty fields are hidden.
 export const PROJECTS = [
   {
     id: "myeasyprep",
     category: "EdTech platform",
     title: "Myeasyprep",
     description:
-      "A multilingual French exam prep platform (TEF/TCF) serving hundreds of learners across Africa with mock exams, progress dashboards, and smart revision tools.",
+      "A live English and French exam prep platform for the TEF and TCF, French tests accepted for Canadian immigration. Serves hundreds of learners across Africa with mock exams, progress dashboards and smart revision tools.",
     gradient: "g2",
     glyph: "⬡",
     stack: ["React", "Tailwind CSS", "Node.js", "PostgreSQL"],
     link: "https://language-test-app-amber.vercel.app/",
     thumb: "/projects/thumbnails/myeasyprep.png",
+    status: "Live product",
+    role: "",
+    overview:
+      "Myeasyprep helps people prepare for the TEF and TCF, two widely used French-language proficiency exams. The experience is multilingual, and it serves hundreds of learners across Africa.\n\nLearners practice with mock exams, follow their results on progress dashboards, and use smart revision tools to prepare.",
+    highlights: [
+      "Mock exams for TEF and TCF practice",
+      "Progress dashboards for tracking results",
+      "Smart revision tools",
+      "Multilingual experience for learners across Africa",
+      "Deployed on Vercel",
+    ],
+    techNotes: [
+      ["React", "Front-end interface"],
+      ["Tailwind CSS", "Styling"],
+      ["Node.js", "Server-side logic and API"],
+      ["PostgreSQL", "Relational data storage"],
+    ],
+    why: "TEF and TCF are among the French tests accepted for Canadian immigration, so this product speaks directly to the bilingual Canadian context. It is also live and in use, not a demo.",
   },
   {
     id: "bloosat-crm",
     category: "CRM platform",
     title: "Bloosat CRM",
     description:
-      "A full CRM platform enabling Bloosat SA to monitor and manage customer records at scale, with automated billing and dynamic email scheduling.",
+      "A production CRM that lets Bloosat SA monitor and manage customer records at scale, with automated billing and dynamic email scheduling.",
     gradient: "g1",
     glyph: "◈",
     stack: ["React", "Node.js", "MySQL", "REST API"],
     link: "https://ssobloosat.com/v3",
     thumb: "/projects/thumbnails/crm.png",
+    status: "Live product",
+    role: "Software Engineer, Bloosat SA",
+    overview:
+      "A CRM platform built for Bloosat SA so the company can monitor and manage its customer records at scale.\n\nIt automates billing and schedules emails dynamically, which takes repetitive work off the team.",
+    highlights: [
+      "Customer record management at scale",
+      "Automated billing",
+      "Dynamic email scheduling",
+      "REST API connecting the React front end to the Node.js back end and MySQL",
+    ],
+    techNotes: [
+      ["React", "Front-end interface"],
+      ["Node.js", "Server-side logic and API"],
+      ["MySQL", "Relational data storage"],
+      ["REST API", "Contract between the front end and back end"],
+    ],
+    why: "Shows I can own a business-critical system from requirements through data model, API and interface to production use.",
   },
   {
     id: "open-pharmacy",
     category: "Health tool",
     title: "Open Pharmacy",
-    description: "A live tool that shows which pharmacies are open near you in Cameroon, and lets you search for medicines and compare them.",
+    description:
+      "A live tool that shows which pharmacies are open near you in Cameroon, and lets you search for medicines and compare them.",
     gradient: "g7",
     glyph: "✚",
     stack: ["Vercel"],
     link: "https://open-pharmacy-git-main-gildas-projects-6b98c95c.vercel.app/",
     thumb: "/projects/thumbnails/open-pharmacy.png",
+    status: "Live product",
+    role: "",
+    overview:
+      "Open Pharmacy helps people in Cameroon find a pharmacy that is open right now, near where they are, and search for medicines and compare them.",
+    highlights: [
+      "Live view of which pharmacies are open nearby",
+      "Medicine search with comparison",
+      "Built for users in Cameroon",
+      "Deployed on Vercel",
+    ],
+    techNotes: [["Vercel", "Hosting and deployment"]],
+    why: "Shows product thinking: a practical tool for a real local problem, shipped live.",
   },
   {
     id: "photonet-shop",
     category: "E-commerce",
     title: "Photonet Shop",
-    description: "A live online shop where customers order photo prints from home.",
+    description: "A live online shop where customers order photo prints from the comfort of their homes.",
     gradient: "g5",
     glyph: "◉",
     stack: [],
     link: "https://photonet.shop/",
     thumb: "/projects/thumbnails/photonet.png",
+    status: "Live product",
+    role: "",
+    overview: "Photonet Shop lets customers order picture printouts online from home instead of visiting a print shop.",
+    highlights: ["Online ordering of photo prints", "Customer-facing storefront, live in production"],
+    techNotes: [],
+    why: "Shows I can ship a customer-facing ordering experience that real people use.",
   },
   {
     id: "games-galerie",
@@ -79,6 +135,16 @@ export const PROJECTS = [
     stack: ["WhatsApp", "Vercel"],
     link: "https://games-galerie-hydtbipng-gildas-projects-6b98c95c.vercel.app",
     thumb: "/projects/thumbnails/games-galerie.png",
+    status: "Sample project",
+    role: "",
+    overview:
+      "A sample click-to-order app. Instead of a full checkout, customers click to order and reach the business directly on WhatsApp.",
+    highlights: ["Click-to-order flow", "Direct contact with the business on WhatsApp", "Deployed on Vercel"],
+    techNotes: [
+      ["WhatsApp", "Channel customers use to contact the business and order"],
+      ["Vercel", "Hosting and deployment"],
+    ],
+    why: "A lightweight alternative to a full checkout, using a messaging channel customers already use.",
   },
   {
     id: "github-dashboard",
@@ -90,18 +156,35 @@ export const PROJECTS = [
     stack: ["Vercel"],
     link: "https://github-analytic-dashbaord-eta.vercel.app/",
     thumb: "/projects/thumbnails/github-dashboard.png",
+    status: "Side project",
+    role: "",
+    overview: "A GitHub analytics dashboard deployed on Vercel.",
+    highlights: [],
+    techNotes: [["Vercel", "Hosting and deployment"]],
+    why: "",
   },
   {
     id: "vehicle-tracking",
     category: "Real-time API",
     title: "Vehicle Tracking API",
     description:
-      "A robust real-time vehicle tracking web API built with Node.js for A2I Sarl, with comprehensive testing and live data support.",
+      "A real-time vehicle tracking web API built with Node.js at A2I Sarl, with comprehensive testing and live data support. I contributed to its development and testing.",
     gradient: "g3",
     glyph: "◎",
     stack: ["Node.js", "REST API", "PostgreSQL"],
     link: null,
     thumb: "/projects/thumbnails/server.png",
+    status: "Client work, no public link",
+    role: "Software Engineer, A2I Sarl",
+    overview:
+      "A real-time web API for tracking vehicles, built with Node.js at A2I Sarl. It supports live data and was developed with comprehensive testing.",
+    highlights: ["Real-time vehicle tracking over a REST API", "Live data support", "Comprehensive testing", "Contributed to development and testing"],
+    techNotes: [
+      ["Node.js", "Server-side logic and real-time API"],
+      ["REST API", "Interface for client applications"],
+      ["PostgreSQL", "Relational data storage"],
+    ],
+    why: "Shows I can work on real-time backend services and test them properly before release.",
   },
   {
     id: "billing-automation",
@@ -114,6 +197,18 @@ export const PROJECTS = [
     stack: ["Python", "Node.js", "MySQL", "CI/CD"],
     link: null,
     thumb: "/projects/thumbnails/billing-automation.png",
+    status: "Internal tooling, no public link",
+    role: "Software Engineer, Bloosat SA",
+    overview:
+      "A set of automation scripts that handle billing and invoicing, monitor servers, and back up data. They reduce manual workload and make the systems more reliable.",
+    highlights: ["Automated billing and invoicing", "Server monitoring", "Automated data backups", "Fewer manual tasks for the team"],
+    techNotes: [
+      ["Python", "Scripting for automation"],
+      ["Node.js", "Server-side tooling"],
+      ["MySQL", "Billing and records data"],
+      ["CI/CD", "Automated builds and deployments"],
+    ],
+    why: "Shows I look for repeatable work to automate and care about reliability, not only features.",
   },
   {
     id: "server-infrastructure",
@@ -126,6 +221,19 @@ export const PROJECTS = [
     stack: ["PostgreSQL", "MySQL", "Docker", "VMware", "VirtualBox"],
     link: null,
     thumb: "/projects/thumbnails/docker.gif",
+    status: "Production operations",
+    role: "",
+    overview:
+      "Day-to-day work managing and optimizing high-volume MySQL and PostgreSQL databases and the servers they run on, along with third-party API integrations, across multiple production environments.",
+    highlights: ["Database management and optimization", "Server infrastructure", "Third-party API integrations", "Multiple production environments"],
+    techNotes: [
+      ["PostgreSQL", "Relational data storage"],
+      ["MySQL", "Relational data storage"],
+      ["Docker", "Containerized deployments"],
+      ["VMware", "Virtual machines for environments"],
+      ["VirtualBox", "Virtual machines for development and testing"],
+    ],
+    why: "Shows I can run the systems behind an application as well as write the code on top of them.",
   },
 ];
 

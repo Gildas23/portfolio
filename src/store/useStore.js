@@ -39,8 +39,10 @@ export const useStore = create(
       slug: null,
       skill: null,
       showAll: false,
+      editMode: false, // owner tools (add/remove), toggled with Alt+N
       saveError: false,
 
+      toggleEdit: () => set((s) => ({ editMode: !s.editMode })),
       toggleTheme: () => set((s) => ({ theme: s.theme === "dark" ? "light" : "dark" })),
       setRoute: (r) => set({ view: r.view, slug: r.slug, skill: r.skill }),
       toggleShowAll: () => set((s) => ({ showAll: !s.showAll })),

@@ -23,6 +23,8 @@ export const formatDate = (d) =>
 
 // Hash routes: "#/blog", "#/blog/<slug>", "#/blog?skill=<name>". Anything else is the home page.
 export const parseHash = () => {
+  const pm = window.location.hash.match(/^#\/projects\/([^?/]+)$/);
+  if (pm) return { view: "project", slug: decodeURIComponent(pm[1]), skill: null };
   const m = window.location.hash.match(/^#\/blog(?:\/([^?/]+))?(?:\?skill=(.*))?$/);
   if (!m) return { view: "home", slug: null, skill: null };
   const dec = (v) => (v ? decodeURIComponent(v) : null);
@@ -34,7 +36,8 @@ export const navigate = (hash) => {
   window.dispatchEvent(new HashChangeEvent("hashchange"));
 };
 
-
+// Prefix root-relative image paths ("/projects/a.png") with Vite's base URL so they still
+// work when the site is served from a subpath such as github.io/repo-name/. Full URLs pass through.
 export const asset = (p) => {
   const base = (typeof import.meta !== "undefined" && import.meta.env && import.meta.env.BASE_URL) || "/";
   return p && p.startsWith("/") && !p.startsWith("//") ? base + p.slice(1) : p;
