@@ -58,6 +58,38 @@ export const PROJECTS = [
     why: "TEF and TCF are among the French tests accepted for Canadian immigration, so this product speaks directly to the bilingual Canadian context. It is also live and in use, not a demo.",
   },
   {
+    id: "airborne-magnetic-survey-viewer",
+    category: "Data visualization",
+    title: "Airborne Magnetic Survey Viewer",
+    description:
+      "An interactive viewer for airborne magnetic survey data. A map of flight lines, a linked profile chart and a histogram update together as you select regions and filter values.",
+    gradient: "g3",
+    glyph: "≋",
+    stack: ["React", "Vite", "Tailwind CSS", "Canvas"],
+    link: "https://airborne-flame.vercel.app/",
+
+    thumb: "/projects/thumbnails/amsv.png",
+    status: "Portfolio project",
+    role: "",
+    overview:
+      "A web app for exploring airborne magnetic survey data in a way that is easy to read for people outside geophysics. Each reading is drawn as a point on a map, coloured by magnetic field intensity.\n\nThe built-in surveys are synthetic and made for demonstration. You can also open your own CSV file of survey readings.",
+    highlights: [
+      "Canvas map that stays responsive with many points",
+      "Drag to select a region; statistics and histogram follow the selection",
+      "Map and profile hover are linked; click a point to choose its line",
+      "Intensity filters, three colour palettes (one colour-blind safe) and keyboard navigation",
+      "Current view stored in the URL so it can be shared",
+      "Clear error messages for bad CSV files; unit tests for parsing and filtering",
+    ],
+    techNotes: [
+      ["React", "Components and shared state in a custom hook"],
+      ["Vite", "Build tooling and dev server"],
+      ["Tailwind CSS", "Styling"],
+      ["Canvas", "Drawing the survey points and the interactive overlay"],
+    ],
+    why: "Shows I can take a dense technical data set and build an interface that makes it approachable, with attention to interaction, accessibility and performance.",
+  },
+  {
     id: "bloosat-crm",
     category: "CRM platform",
     title: "Bloosat CRM",
@@ -110,38 +142,7 @@ export const PROJECTS = [
     techNotes: [["Vercel", "Hosting and deployment"]],
     why: "Shows product thinking: a practical tool for a real local problem, shipped live.",
   },
-  {
-    id: "airborne-magnetic-survey-viewer",
-    category: "Data visualization",
-    title: "Airborne Magnetic Survey Viewer",
-    description:
-      "An interactive viewer for airborne magnetic survey data. A map of flight lines, a linked profile chart and a histogram update together as you select regions and filter values.",
-    gradient: "g3",
-    glyph: "≋",
-    stack: ["React", "Vite", "Tailwind CSS", "Canvas"],
-    link: "https://airborne-flame.vercel.app/",
 
-    thumb: "/projects/thumbnails/amsv.png",
-    status: "Portfolio project",
-    role: "",
-    overview:
-      "A web app for exploring airborne magnetic survey data in a way that is easy to read for people outside geophysics. Each reading is drawn as a point on a map, coloured by magnetic field intensity.\n\nThe built-in surveys are synthetic and made for demonstration. You can also open your own CSV file of survey readings.",
-    highlights: [
-      "Canvas map that stays responsive with many points",
-      "Drag to select a region; statistics and histogram follow the selection",
-      "Map and profile hover are linked; click a point to choose its line",
-      "Intensity filters, three colour palettes (one colour-blind safe) and keyboard navigation",
-      "Current view stored in the URL so it can be shared",
-      "Clear error messages for bad CSV files; unit tests for parsing and filtering",
-    ],
-    techNotes: [
-      ["React", "Components and shared state in a custom hook"],
-      ["Vite", "Build tooling and dev server"],
-      ["Tailwind CSS", "Styling"],
-      ["Canvas", "Drawing the survey points and the interactive overlay"],
-    ],
-    why: "Shows I can take a dense technical data set and build an interface that makes it approachable, with attention to interaction, accessibility and performance.",
-  },
   {
     id: "photonet-shop",
     category: "E-commerce",
