@@ -9,7 +9,7 @@ export const PROFILE = {
   contactNote: " I'm fluent in English and French, so feel free to get in touch in either.",
   // contactNoteFr: "Vous pouvez m'écrire en français ou en anglais, je suis à l'aise dans les deux langues.",
   summary:
-    "I'm a software engineer who enjoys turning ideas into reliable web apps and APIs. Over 4 years I've worked with React, Node.js and Java, shipped to AWS, automated releases, and stayed on to support what I built, whether it was a small feature or a large update.",
+    "I'm a software engineer who loves turning a rough idea into something people actually use. Over 4 years I've built web apps and APIs with React, Node.js, and Java, shipped them to AWS, and automated the releases. I like staying around after launch too, because the best part is seeing it work for real people.",
 };
 
 export const SKILLS = [
