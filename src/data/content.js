@@ -90,6 +90,35 @@ export const PROJECTS = [
     why: "Shows I can take a dense technical data set and build an interface that makes it approachable, with attention to interaction, accessibility and performance.",
   },
   {
+    id: "chaser-followups",
+    category: "SaaS automation tool",
+    title: "Chaser",
+    description:
+      "A billing follow-up tool that finds overdue invoices, drafts a personalized email for each one, and holds every draft for human approval before anything is sent.",
+    gradient: "g2",
+    glyph: "✉",
+    stack: ["React", "Vite", "Tailwind CSS"],
+    link: "https://chaser-flame.vercel.app/",
+    thumb: "/projects/thumbnails/chaser.png",
+    status: "Portfolio project (live demo)",
+    role: "Designer and developer (personal project)",
+    overview:
+      "A small SaaS-style tool for chasing unpaid invoices without writing every reminder by hand. It flags overdue invoices with no message in the last 7 days, picks a stage (reminder, first overdue, second overdue or final notice) from how late each one is, and drafts an email in the customer's preferred tone.\n\nEvery draft lands in a review queue. A person edits, approves or rejects it, and Send stays locked until a message is approved. A cleaner, public rebuild of the billing-email workflow from my CRM work.",
+    highlights: [
+      "Approval-gated sending: nothing goes out until a reviewer approves it",
+      "Follow-up rule that skips invoices contacted in the last 7 days",
+      "Stage and tone chosen automatically from days overdue and customer preference",
+      "Live countdowns for due dates, the next automatic check and 7-day cooldowns",
+      "Review queue, invoice and customer views, and send history",
+    ],
+    techNotes: [
+      ["React", "Single-page dashboard with hash routing"],
+      ["Vite", "Dev server and production build"],
+      ["Tailwind CSS", "Styling with light and dark themes"],
+      ["Demo data", "Fake customers and invoices, in memory"],
+    ],
+    why: "Shows I can turn a real business workflow into a clear product: a rule-driven process, a human-in-the-loop interface, and an honest path from demo to production.",
+  }, {
     id: "bloosat-crm",
     category: "CRM platform",
     title: "Bloosat CRM",
