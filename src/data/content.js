@@ -82,7 +82,7 @@ export const PROJECTS = [
       ["PostgreSQL", "Secondary relational data storage"]
     ],
     "why": "A specialized social network and marketplace empowering agricultural stakeholders, farmers, and investors across Africa."
-  }
+  },
   {
     id: "myeasyprep",
     category: "EdTech platform",
