@@ -28,6 +28,62 @@ export const SKILLS = [
 // highlights[], techNotes[[name, what it does here]], why. Empty fields are hidden.
 export const PROJECTS = [
   {
+    "id": "biatoben",
+    "category": "Classifieds Marketplace",
+    "title": "Biatoben",
+    "description": "A live classified ads platform in Cameroon enabling users to buy and sell items easily across Douala, Yaoundé, and nationwide, featuring structured categories for electronics, fashion, real estate, and services.",
+    "gradient": "g2",
+    "glyph": "⬡",
+    "stack": ["PHP", "MySQL", "Firebase", "PostgreSQL"],
+    "link": "https://biatoben.net",
+    "thumb": "/projects/thumbnails/biatoben.png",
+    "status": "Live product",
+    "role": "Full-Stack Developer",
+    "overview": "Biatoben is a smart classified ads platform serving users across Cameroon. It provides an intuitive marketplace for browsing, publishing, and managing listings across multiple categories including electronics, home goods, vehicles, and professional services.",
+    "highlights": [
+      "Classified ads listing, search, and categorization",
+      "Location-based filtering across cities in Cameroon",
+      "User account and listing management dashboards",
+      "Responsive, mobile-optimized user experience",
+      "Deployed in production"
+    ],
+    "techNotes": [
+      ["PHP", "Core server-side logic and application architecture"],
+      ["MySQL", "Primary relational database storage"],
+      ["Firebase", "Real-time updates and authentication services"],
+      ["PostgreSQL", "Secondary relational data storage"]
+    ],
+    "why": "A live, production-grade classifieds platform connecting buyers and sellers across urban centers in Cameroon."
+  },
+  {
+    "id": "iwolonet",
+    "category": "AgriTech Social Network",
+    "title": "Iwolonet",
+    "description": "An agricultural social network connecting farmers, breeders, buyers, and agricultural service providers across Africa to foster business relationships and trade in agro-pastoral products.",
+    "gradient": "g2",
+    "glyph": "⬡",
+    "stack": ["PHP", "MySQL", "Firebase", "PostgreSQL"],
+    "link": "https://iwolonet.com",
+    "thumb": "/projects/thumbnails/iwolonet.png",
+    "status": "Live product",
+    "role": "Full-Stack Developer",
+    "overview": "Iwolonet serves as a digital meeting place for the agricultural value chain. It enables producers, suppliers of phytosanitary materials, and investors to showcase products, connect with buyers, and discover agricultural opportunities.",
+    "highlights": [
+      "Agricultural social networking and professional profiles",
+      "Business matching between producers and buyers",
+      "Agro-pastoral product and service directory",
+      "Accessible web and mobile interfaces",
+      "Deployed in production"
+    ],
+    "techNotes": [
+      ["PHP", "Core server-side logic and application architecture"],
+      ["MySQL", "Primary relational database storage"],
+      ["Firebase", "Real-time updates and authentication services"],
+      ["PostgreSQL", "Secondary relational data storage"]
+    ],
+    "why": "A specialized social network and marketplace empowering agricultural stakeholders, farmers, and investors across Africa."
+  }
+  {
     id: "myeasyprep",
     category: "EdTech platform",
     title: "Myeasyprep",
