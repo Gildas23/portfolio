@@ -2,7 +2,7 @@
 export const PROFILE = {
   name: "Gildas Chatue",
   title: "Full-stack software engineer",
-  location: "Ottawa, Ontario",
+  location: "",
   email: "gildassob@gmail.com",
   linkedin: "www.linkedin.com/in/gildas-chatue",
   github: "https://github.com/Gildas23",
