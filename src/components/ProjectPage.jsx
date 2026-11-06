@@ -56,7 +56,7 @@ export default function ProjectPage({ id }) {
         )}
       </header>
 
-      <Thumb src={p.thumb} alt={"Screenshot of " + p.title} gradient={p.gradient} glyph={p.glyph} className="mt-8 aspect-[2/1] rounded-lg" />
+      <Thumb src={p.thumb} video={p.video} alt={"Screenshot of " + p.title} gradient={p.gradient} glyph={p.glyph} className="mt-8 aspect-[2/1] rounded-lg" />
 
       <div className="max-w-2xl">
         <Block title="Overview">
