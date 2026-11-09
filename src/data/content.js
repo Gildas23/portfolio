@@ -1,7 +1,7 @@
 /* ============ EDIT YOUR CONTENT HERE ============ */
 export const PROFILE = {
   name: "Gildas Chatue",
-  title: "Full-stack software engineer",
+  title: "Full-stack software Developer",
   location: "",
   email: "gildassob@gmail.com",
   linkedin: "https://www.linkedin.com/in/gildas-chatue",
@@ -255,7 +255,7 @@ export const PROJECTS = [
     link: "https://ssobloosat.com/v3",
     thumb: "/projects/thumbnails/crm.png",
     status: "Live product",
-    role: "Software engineer, Bloosat SA",
+    role: "Full-stack Software Developer, Bloosat SA",
     overview:
       "A CRM platform built for Bloosat SA to monitor and manage customer records at scale.\n\nIt automates billing and schedules emails dynamically, removing repetitive work from the team.",
     highlights: [
@@ -284,7 +284,7 @@ export const PROJECTS = [
     link: null,
     thumb: "/projects/thumbnails/server.png",
     status: "Client work, no public link",
-    role: "Software engineer, A2I Sarl",
+    role: "Full-stack Software Developer, A2I Sarl",
     overview:
       "A real-time web API for tracking vehicles, built with Node.js at A2I Sarl. It supports live data and was developed with comprehensive testing.",
     highlights: [
@@ -383,7 +383,7 @@ export const PROJECTS = [
     link: null,
     thumb: "/projects/thumbnails/billing-automation.png",
     status: "Internal tooling, no public link",
-    role: "Software engineer, Bloosat SA",
+    role: "Full-stack Software Developer, Bloosat SA",
     overview:
       "A set of automation scripts that handle billing and invoicing, monitor servers and back up data. They reduce manual workload and make the underlying systems more reliable.",
     highlights: [
@@ -405,7 +405,7 @@ export const PROJECTS = [
 
 export const EXPERIENCE = [
   {
-    role: "Software Engineer",
+    role: "Full-stack Software Developer",
     org: "Bloosat SA",
     dates: "Oct 2023 – Sep 2026",
     points: [
@@ -425,7 +425,7 @@ export const EXPERIENCE = [
     ],
   },
   {
-    role: "Software Engineer",
+    role: "Full-stack Software Developer",
     org: "A2I Sarl",
     dates: "Jun 2022 – Aug 2023",
     points: [
@@ -440,7 +440,7 @@ export const EXPERIENCE = [
     ],
   },
   {
-    role: "Software Developer Intern",
+    role: "Full-stack Software Developer Intern",
     org: "A2I Sarl",
     dates: "Jun 2021 – Sep 2021",
     points: ["Researched emerging web technologies and recommended integrations aligned with business goals."],
