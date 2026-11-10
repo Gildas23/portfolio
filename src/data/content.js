@@ -8,7 +8,6 @@ export const PROFILE = {
   github: "https://github.com/Gildas23",
   contactNote: "I am fluent in English and French and welcome inquiries in either language.",
   // contactNoteFr: "Je travaille couramment en français et en anglais, et je réponds volontiers dans l'une ou l'autre langue.",
-  availability: "Open to full-stack and back-end roles",
   summary:
     "I build web applications and APIs with React, Node.js and Java, ship them to AWS, and stay with them after launch so they keep working for the people who use them.",
   // Shown beside the name in the hero. Each entry is [label, value].

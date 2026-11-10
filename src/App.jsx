@@ -5,8 +5,8 @@ import { useStore } from "./store/useStore";
 import { PROFILE, SKILLS, PROJECTS, EXPERIENCE, FEATURED } from "./data/content";
 import { focus, linkCls, primaryBtn, outlineBtn } from "./lib/styles";
 import { Tag, Section } from "./components/ui";
-import ProjectCard from "./components/ProjectCard";
-import FeaturedProject from "./components/FeaturedProject";
+import ProjectList from "./components/ProjectList";
+import ExperienceList from "./components/ExperienceList";
 import AddProjectForm from "./components/AddProjectForm";
 import BlogPage from "./components/BlogPage";
 import PostPage from "./components/PostPage";
@@ -161,11 +161,11 @@ export default function App() {
           <>
             <div className="grid gap-12 pb-16 pt-14 sm:pb-24 sm:pt-20 md:grid-cols-[minmax(0,1fr)_16rem] md:items-end md:gap-10">
               <div>
-                <p className="flex items-center gap-2 text-sm text-stone-600 dark:text-stone-400">
-                  <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
-                  {PROFILE.availability}
-                  {PROFILE.location ? ", based in " + PROFILE.location : ""}
-                </p>
+                {PROFILE.location && (
+                  <p className="text-sm text-stone-600 dark:text-stone-400">
+                    Based in {PROFILE.location}
+                  </p>
+                )}
                 <h1 className="wordmark mt-6 text-7xl font-extrabold text-stone-900 sm:text-8xl lg:text-[8.5rem] dark:text-stone-50">
                   {PROFILE.name.split(" ").map((w) => (
                     <span key={w} className="block">{w}</span>
@@ -214,27 +214,18 @@ export default function App() {
             </div>
 
             <Section id="projects" title="Projects">
-              <div className="space-y-5">
-                {featured[0] && <FeaturedProject lead project={featured[0]} />}
-                <div className="grid gap-5 md:grid-cols-2">
-                  {featured.slice(1).map((p) => (
-                    <FeaturedProject key={p.id} project={p} />
-                  ))}
-                </div>
+              <h3 className="text-sm font-medium uppercase tracking-wide text-stone-500 dark:text-stone-400">
+                Selected work
+              </h3>
+              <div className="mt-4">
+                <ProjectList projects={featured} />
               </div>
 
-              <h3 className="mt-16 text-xl font-bold tracking-tight text-stone-900 dark:text-stone-50">
+              <h3 className="mt-14 text-sm font-medium uppercase tracking-wide text-stone-500 dark:text-stone-400">
                 More projects
               </h3>
-              <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {shownRest.map((p) => (
-                  <ProjectCard
-                    key={p.id}
-                    project={p}
-                    canRemove={p.id.startsWith("u")}
-                    onRemove={removeProject}
-                  />
-                ))}
+              <div className="mt-4">
+                <ProjectList projects={shownRest} thumbs={false} onRemove={removeProject} />
               </div>
               {rest.length > PREVIEW && (
                 <button onClick={toggleShowAll} aria-expanded={showAll} className={"mt-6 " + outlineBtn}>
@@ -258,44 +249,7 @@ export default function App() {
             </Section>
 
             <Section id="experience" title="Experience">
-              <ol className="space-y-8">
-                {EXPERIENCE.map((job) => (
-                  <li
-                    key={job.org + job.dates}
-                    className="grid gap-1 sm:grid-cols-[9.5rem_1fr] sm:gap-6"
-                  >
-                    <p className="text-sm text-stone-500 dark:text-stone-400 sm:pt-0.5">
-                      {job.dates}
-                    </p>
-                    <div>
-                      <h3 className="font-semibold text-stone-900 dark:text-stone-50">
-                        {job.role}, {job.org}
-                      </h3>
-                      <ul className="mt-2 list-disc space-y-1 pl-5 text-stone-600 dark:text-stone-400">
-                        {job.points.map((pt) => (
-                          <li key={pt}>{pt}</li>
-                        ))}
-                      </ul>
-                      <h4 className="mt-5 text-sm font-medium text-stone-900 dark:text-stone-50">
-                        Achievements
-                      </h4>
-                      <ul className="mt-2 space-y-2.5 text-stone-600 dark:text-stone-400">
-                        {job.achievements.map((a) => (
-                          <li
-                            key={a.text}
-                            className="flex flex-col gap-0.5 sm:flex-row sm:gap-4"
-                          >
-                            <span className="text-sm text-teal-700 sm:w-28 sm:shrink-0 sm:pt-0.5 dark:text-teal-300">
-                              {a.area}
-                            </span>
-                            <span>{a.text}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </li>
-                ))}
-              </ol>
+              <ExperienceList jobs={EXPERIENCE} />
             </Section>
 
             <Section id="skills" title="Skills">
@@ -321,8 +275,8 @@ export default function App() {
 
             <Section id="contact" title="Contact">
               <p className="text-stone-600 dark:text-stone-400">
-                {PROFILE.location ? "I am based in " + PROFILE.location + " and" : "I am"}{" "}
-                open to full-stack and back-end roles. Write to me at{" "}
+                {PROFILE.location ? "I am based in " + PROFILE.location + ". " : ""}
+                Write to me at{" "}
                 <a
                   className={linkCls.replace("text-sm ", "")}
                   href={"mailto:" + PROFILE.email}
