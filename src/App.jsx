@@ -5,7 +5,7 @@ import { useStore } from "./store/useStore";
 import { PROFILE, SKILLS, PROJECTS, EXPERIENCE, FEATURED } from "./data/content";
 import { focus, linkCls, primaryBtn, outlineBtn } from "./lib/styles";
 import { Tag, Section } from "./components/ui";
-import ProjectList from "./components/ProjectList";
+import ProjectCarousel from "./components/ProjectCarousel";
 import ExperienceList from "./components/ExperienceList";
 import AddProjectForm from "./components/AddProjectForm";
 import BlogPage from "./components/BlogPage";
@@ -29,8 +29,6 @@ export default function App() {
     slug,
     editMode,
     toggleEdit,
-    showAll,
-    toggleShowAll,
     saveError,
   } = useStore();
   const saved = useStore((s) => s.projects);
@@ -48,8 +46,6 @@ export default function App() {
   const all = [...PROJECTS, ...saved];
   const featured = FEATURED.map((id) => all.find((p) => p.id === id)).filter(Boolean);
   const rest = all.filter((p) => !FEATURED.includes(p.id));
-  const PREVIEW = 6; // "More projects" shown before "Show all"
-  const shownRest = showAll ? rest : rest.slice(0, PREVIEW);
 
   // Alt+N shows or hides the owner tools (add project, add post, remove, copy as code).
   useEffect(() => {
@@ -214,24 +210,7 @@ export default function App() {
             </div>
 
             <Section id="projects" title="Projects">
-              <h3 className="text-sm font-medium uppercase tracking-wide text-stone-500 dark:text-stone-400">
-                Selected work
-              </h3>
-              <div className="mt-4">
-                <ProjectList projects={featured} />
-              </div>
-
-              <h3 className="mt-14 text-sm font-medium uppercase tracking-wide text-stone-500 dark:text-stone-400">
-                More projects
-              </h3>
-              <div className="mt-4">
-                <ProjectList projects={shownRest} thumbs={false} onRemove={removeProject} />
-              </div>
-              {rest.length > PREVIEW && (
-                <button onClick={toggleShowAll} aria-expanded={showAll} className={"mt-6 " + outlineBtn}>
-                  {showAll ? "Show fewer projects" : "Show " + (rest.length - PREVIEW) + " more projects"}
-                </button>
-              )}
+              <ProjectCarousel projects={[...featured, ...rest]} onRemove={removeProject} />
               {saveError && (
                 <p role="alert" className="mt-4 text-sm text-red-600 dark:text-red-400">
                   This browser could not save your changes, so they will
