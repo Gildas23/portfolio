@@ -18,7 +18,7 @@ export const PROFILE = {
   ],
 };
 
-// Projects shown large at the top of the Projects section, in this order.
+// Projects linked in the "Shipped and live" profile fact, in this order.
 export const FEATURED = ["iwolonet", "biatoben", "myeasyprep"];
 
 export const SKILLS = [
@@ -36,7 +36,7 @@ export const SKILLS = [
 // Optional detail-page fields: status, role, overview (blank line = new paragraph),
 // highlights[], techNotes[[name, what it does here]], why. Empty fields are hidden.
 export const PROJECTS = [
-    {
+  {
     id: "pip-ai-agent",
     category: "AI agent",
     title: "Pip",

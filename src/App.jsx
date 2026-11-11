@@ -45,7 +45,6 @@ export default function App() {
 
   const all = [...PROJECTS, ...saved];
   const featured = FEATURED.map((id) => all.find((p) => p.id === id)).filter(Boolean);
-  const rest = all.filter((p) => !FEATURED.includes(p.id));
 
   // Alt+N shows or hides the owner tools (add project, add post, remove, copy as code).
   useEffect(() => {
@@ -210,7 +209,7 @@ export default function App() {
             </div>
 
             <Section id="projects" title="Projects">
-              <ProjectCarousel projects={[...featured, ...rest]} onRemove={removeProject} />
+              <ProjectCarousel projects={all} onRemove={removeProject} />
               {saveError && (
                 <p role="alert" className="mt-4 text-sm text-red-600 dark:text-red-400">
                   This browser could not save your changes, so they will
