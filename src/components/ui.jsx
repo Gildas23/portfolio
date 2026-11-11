@@ -14,9 +14,9 @@ export const LinkOut = ({ href, children }) =>
   ) : null;
 
 export const Section = ({ id, title, children }) => (
-  <section id={id} className="scroll-mt-16 border-t border-stone-200 py-12 dark:border-stone-800">
-    <h2 className="text-xl font-semibold tracking-tight text-stone-900 dark:text-stone-50">{title}</h2>
-    <div className="mt-6">{children}</div>
+  <section id={id} className="scroll-mt-16 border-t border-stone-200 py-16 dark:border-stone-800">
+    <h2 className="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl dark:text-stone-50">{title}</h2>
+    <div className="mt-8">{children}</div>
   </section>
 );
 

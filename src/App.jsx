@@ -1,11 +1,12 @@
 // Tailwind must use class-based dark mode (v3: darkMode: "class";
 // v4: @custom-variant dark (&:where(.dark, .dark *));).
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useStore } from "./store/useStore";
-import { PROFILE, SKILLS, PROJECTS, EXPERIENCE } from "./data/content";
+import { PROFILE, SKILLS, PROJECTS, EXPERIENCE, FEATURED } from "./data/content";
 import { focus, linkCls, primaryBtn, outlineBtn } from "./lib/styles";
 import { Tag, Section } from "./components/ui";
-import ProjectCard from "./components/ProjectCard";
+import ProjectCarousel from "./components/ProjectCarousel";
+import ExperienceList from "./components/ExperienceList";
 import AddProjectForm from "./components/AddProjectForm";
 import BlogPage from "./components/BlogPage";
 import PostPage from "./components/PostPage";
@@ -28,15 +29,12 @@ export default function App() {
     slug,
     editMode,
     toggleEdit,
-    showAll,
-    toggleShowAll,
     saveError,
   } = useStore();
   const saved = useStore((s) => s.projects);
   const setRoute = useStore((s) => s.setRoute);
   const removeProject = useStore((s) => s.removeProject);
   const [adding, setAdding] = useState(false);
-  const scroller = useRef(null);
 
   // Apply the theme to <html>. The store persists it, so it survives reloads.
   useEffect(() => {
@@ -46,8 +44,8 @@ export default function App() {
   }, [theme]);
 
   const all = [...PROJECTS, ...saved];
-  const slide = (dir) =>
-    scroller.current?.scrollBy({ left: dir * 320, behavior: "smooth" });
+  const featured = FEATURED.map((id) => all.find((p) => p.id === id)).filter(Boolean);
+  const rest = all.filter((p) => !FEATURED.includes(p.id));
 
   // Alt+N shows or hides the owner tools (add project, add post, remove, copy as code).
   useEffect(() => {
@@ -96,10 +94,6 @@ export default function App() {
     );
   };
 
-  const arrow =
-    "h-9 w-9 rounded-md border border-stone-300 text-lg hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-900 " +
-    focus;
-
   return (
     <div className="flex min-h-screen flex-col bg-stone-50 font-sans text-base leading-relaxed text-stone-800 antialiased dark:bg-stone-950 dark:text-stone-300">
       <header className="sticky top-0 z-10 border-b border-stone-200 bg-stone-50/90 backdrop-blur dark:border-stone-800 dark:bg-stone-950/90">
@@ -111,7 +105,7 @@ export default function App() {
               goHome();
             }}
             className={
-              "hidden font-semibold text-stone-900 dark:text-stone-50 sm:block " +
+              "hidden font-bold tracking-tight text-stone-900 dark:text-stone-50 sm:block " +
               focus
             }
           >
@@ -135,7 +129,7 @@ export default function App() {
                       "hover:text-teal-700 dark:hover:text-teal-300 " +
                       focus +
                       (current
-                        ? " font-semibold text-teal-700 dark:text-teal-300"
+                        ? " font-semibold text-teal-700 underline decoration-2 underline-offset-[6px] dark:text-teal-300"
                         : "")
                     }
                   >
@@ -161,114 +155,64 @@ export default function App() {
           <ProjectPage id={slug} />
         ) : (
           <>
-            <div className="py-16 sm:py-24">
-              <p className="flex items-center gap-2 text-sm text-stone-600 dark:text-stone-400">
-                <span
-                  className="h-2 w-2 rounded-full bg-emerald-500"
-                  aria-hidden="true"
-                />
-                {/* {PROFILE.title} in {PROFILE.location}, open to roles */}
-              </p>
-              <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight text-stone-900 sm:text-5xl dark:text-stone-50">
-                {PROFILE.name}
-              </h1>
-              <p className="mt-6 max-w-xl text-lg text-stone-600 dark:text-stone-400">
-                {PROFILE.summary}
-              </p>
-              <p className="mt-4 max-w-xl text-stone-600 dark:text-stone-400">
-                {PROFILE.contactNote}{" "}
-                <span lang="fr">{PROFILE.contactNoteFr}</span>
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a href={"mailto:" + PROFILE.email} className={primaryBtn}>
-                  Email me
-                </a>
-                <a
-                  href={PROFILE.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={outlineBtn}
-                >
-                  GitHub
-                </a>
-                <a
-                  href={PROFILE.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={outlineBtn}
-                >
-                  LinkedIn
-                </a>
+            <div className="grid gap-12 pb-16 pt-14 sm:pb-24 sm:pt-20 md:grid-cols-[minmax(0,1fr)_16rem] md:items-end md:gap-10">
+              <div>
+                {PROFILE.location && (
+                  <p className="text-sm text-stone-600 dark:text-stone-400">
+                    Based in {PROFILE.location}
+                  </p>
+                )}
+                <h1 className="wordmark mt-6 text-7xl font-extrabold text-stone-900 sm:text-8xl lg:text-[8.5rem] dark:text-stone-50">
+                  {PROFILE.name.split(" ").map((w) => (
+                    <span key={w} className="block">{w}</span>
+                  ))}
+                </h1>
+                <p className="mt-6 text-2xl font-semibold tracking-tight text-teal-700 dark:text-teal-300">
+                  {PROFILE.title}
+                </p>
+                <p className="mt-3 max-w-lg text-lg text-stone-600 dark:text-stone-400">
+                  {PROFILE.summary}
+                </p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <a href={"mailto:" + PROFILE.email} className={primaryBtn}>
+                    Email me
+                  </a>
+                  <a href={PROFILE.github} target="_blank" rel="noreferrer" className={outlineBtn}>
+                    GitHub
+                  </a>
+                  <a href={PROFILE.linkedin} target="_blank" rel="noreferrer" className={outlineBtn}>
+                    LinkedIn
+                  </a>
+                </div>
               </div>
+
+              <dl className="border-t-2 border-teal-600 text-sm dark:border-teal-400">
+                {PROFILE.facts.map(([k, v]) => (
+                  <div key={k} className="border-b border-stone-200 py-3 dark:border-stone-800">
+                    <dt className="text-stone-500 dark:text-stone-400">{k}</dt>
+                    <dd className="mt-0.5 font-medium text-stone-900 dark:text-stone-50">{v}</dd>
+                  </div>
+                ))}
+                <div className="py-3">
+                  <dt className="text-stone-500 dark:text-stone-400">Shipped and live</dt>
+                  <dd className="mt-0.5 font-medium text-stone-900 dark:text-stone-50">
+                    {featured.map((p, i) => (
+                      <React.Fragment key={p.id}>
+                        {i > 0 && (i === featured.length - 1 ? " and " : ", ")}
+                        <a href={"#/projects/" + p.id} className={"underline decoration-stone-300 underline-offset-4 hover:text-teal-700 hover:decoration-teal-600 dark:decoration-stone-600 dark:hover:text-teal-300 " + focus}>
+                          {p.title}
+                        </a>
+                      </React.Fragment>
+                    ))}
+                  </dd>
+                </div>
+              </dl>
             </div>
 
             <Section id="projects" title="Projects">
-              <div className="mb-4 flex items-center justify-between gap-3">
-                <button
-                  onClick={toggleShowAll}
-                  aria-expanded={showAll}
-                  className={outlineBtn}
-                >
-                  {showAll
-                    ? "Show fewer projects"
-                    : "See all projects (" + all.length + ")"}
-                </button>
-                {!showAll && (
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => slide(-1)}
-                      aria-label="Previous projects"
-                      className={arrow}
-                    >
-                      &lsaquo;
-                    </button>
-                    <button
-                      onClick={() => slide(1)}
-                      aria-label="Next projects"
-                      className={arrow}
-                    >
-                      &rsaquo;
-                    </button>
-                  </div>
-                )}
-              </div>
-              {showAll ? (
-                <div className="grid gap-5 sm:grid-cols-2">
-                  {all.map((p) => (
-                    <ProjectCard
-                      key={p.id}
-                      full
-                      project={p}
-                      canRemove={p.id.startsWith("u")}
-                      onRemove={removeProject}
-                    />
-                  ))}
-                </div>
-              ) : (
-                <div
-                  ref={scroller}
-                  tabIndex={0}
-                  aria-label="Projects"
-                  className={
-                    "-mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-5 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden " +
-                    focus
-                  }
-                >
-                  {all.map((p) => (
-                    <ProjectCard
-                      key={p.id}
-                      project={p}
-                      canRemove={p.id.startsWith("u")}
-                      onRemove={removeProject}
-                    />
-                  ))}
-                </div>
-              )}
+              <ProjectCarousel projects={[...featured, ...rest]} onRemove={removeProject} />
               {saveError && (
-                <p
-                  role="alert"
-                  className="mt-4 text-sm text-red-600 dark:text-red-400"
-                >
+                <p role="alert" className="mt-4 text-sm text-red-600 dark:text-red-400">
                   This browser could not save your changes, so they will
                   disappear when you leave the page. Try a smaller image.
                 </p>
@@ -277,54 +221,14 @@ export default function App() {
                 (adding ? (
                   <AddProjectForm onCancel={() => setAdding(false)} />
                 ) : (
-                  <button
-                    onClick={() => setAdding(true)}
-                    className={"mt-6 " + outlineBtn}
-                  >
+                  <button onClick={() => setAdding(true)} className={"mt-6 " + outlineBtn}>
                     Add a project
                   </button>
                 ))}
             </Section>
 
             <Section id="experience" title="Experience">
-              <ol className="space-y-8">
-                {EXPERIENCE.map((job) => (
-                  <li
-                    key={job.org + job.dates}
-                    className="grid gap-1 sm:grid-cols-[9.5rem_1fr] sm:gap-6"
-                  >
-                    <p className="text-sm text-stone-500 dark:text-stone-400 sm:pt-0.5">
-                      {job.dates}
-                    </p>
-                    <div>
-                      <h3 className="font-semibold text-stone-900 dark:text-stone-50">
-                        {job.role}, {job.org}
-                      </h3>
-                      <ul className="mt-2 list-disc space-y-1 pl-5 text-stone-600 dark:text-stone-400">
-                        {job.points.map((pt) => (
-                          <li key={pt}>{pt}</li>
-                        ))}
-                      </ul>
-                      <h4 className="mt-5 text-sm font-medium text-stone-900 dark:text-stone-50">
-                        Achievements
-                      </h4>
-                      <ul className="mt-2 space-y-2.5 text-stone-600 dark:text-stone-400">
-                        {job.achievements.map((a) => (
-                          <li
-                            key={a.text}
-                            className="flex flex-col gap-0.5 sm:flex-row sm:gap-4"
-                          >
-                            <span className="text-sm text-teal-700 sm:w-28 sm:shrink-0 sm:pt-0.5 dark:text-teal-300">
-                              {a.area}
-                            </span>
-                            <span>{a.text}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </li>
-                ))}
-              </ol>
+              <ExperienceList jobs={EXPERIENCE} />
             </Section>
 
             <Section id="skills" title="Skills">
@@ -350,15 +254,15 @@ export default function App() {
 
             <Section id="contact" title="Contact">
               <p className="text-stone-600 dark:text-stone-400">
-                I am based in {PROFILE.location} and open to full-stack and
-                back-end roles. Write to me at{" "}
+                {PROFILE.location ? "I am based in " + PROFILE.location + ". " : ""}
+                Write to me at{" "}
                 <a
                   className={linkCls.replace("text-sm ", "")}
                   href={"mailto:" + PROFILE.email}
                 >
                   {PROFILE.email}
                 </a>
-                .
+                . {PROFILE.contactNote}
               </p>
             </Section>
           </>
