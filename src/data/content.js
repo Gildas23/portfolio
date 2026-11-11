@@ -37,6 +37,34 @@ export const SKILLS = [
 // highlights[], techNotes[[name, what it does here]], why. Empty fields are hidden.
 export const PROJECTS = [
   {
+    "id": "mini-ai-coding-agent",
+    "category": "AI agent",
+    "title": "Mini AI Coding Agent",
+    "description": "A command-line AI assistant built with Python. It answers prompts, can work with text files, and can run shell commands after you confirm them.",
+    "gradient": "g2",
+    "glyph": "✦",
+    "stack": ["Python", "OpenAI API", "uv"],
+    "link": "",
+    "thumb": "",
+    "status": "In development",
+    "role": "Developer",
+    "overview": "Mini AI Coding Agent is an interactive terminal assistant powered by OpenAI. Ask questions across multiple prompts, and the assistant can use tools to list files, read or write text files, and run shell commands after asking for confirmation.\n\nThe project demonstrates the basic agent loop: send the conversation to the model, run requested tools, return their results, and continue until the model responds. The API key is read from an environment variable rather than stored in the code.",
+    "highlights": [
+      "Interactive command-line chat that keeps conversation context",
+      "Tools for listing directories and reading or writing text files",
+      "Shell commands require user confirmation before execution",
+      "Tool schemas let the model request supported actions",
+      "Checks for a missing API key and handles recoverable errors",
+      "Runs with uv using uv run main"
+    ],
+    "techNotes": [
+      ["Python", "Command-line app and tool implementations"],
+      ["OpenAI API", "Model that responds to prompts and requests tools"],
+      ["uv", "Python project and dependency management"]
+    ],
+    "why": "A small learning project for understanding how an AI agent can call tools, preserve conversation context, and request confirmation before running shell commands."
+  },
+  {
     id: "pip-ai-agent",
     category: "AI agent",
     title: "Pip",
