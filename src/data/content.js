@@ -27,6 +27,37 @@ export const SKILLS = [
 // Optional detail-page fields: status, role, overview (blank line = new paragraph),
 // highlights[], techNotes[[name, what it does here]], why. Empty fields are hidden.
 export const PROJECTS = [
+    {
+    id: "pip-ai-agent",
+    category: "AI agent",
+    title: "Pip",
+    description:
+      "A small AI agent that answers math questions and tells the time by calling tools, built with plain JavaScript, one web page and one small server. No frameworks.",
+    gradient: "g2",
+    glyph: "✦",
+    stack: ["JavaScript", "Node.js", "Anthropic API", "Vercel"],
+    link: "https://first-ai-agent-omega.vercel.app/",
+    thumb: "/projects/thumbnails/pip.png",
+    status: "Live demo",
+    role: "Designer and developer",
+    overview:
+      "Pip is a chat bot that can use tools. When it can answer from memory it just replies. When it needs a calculator or a clock, it asks for the tool to be run, reads the result and then answers.\n\nIt is built to make the agent loop easy to understand: send the conversation to the model, run any tool it requests, add the result, and repeat until it gives an answer. A beginner-friendly README explains each step, and a terminal version shows the bare loop without the web page.",
+    highlights: [
+      "Tool-using agent loop: the model asks, the server runs the tool, the model answers",
+      "Calculator and clock tools written as plain JavaScript functions",
+      "Server-side API key handling, so the key is never exposed in the browser",
+      "Chat interface with tool-call labels shown in the conversation",
+      "Terminal version of the same agent for learning",
+      "Beginner-friendly README covering setup, vocabulary, troubleshooting and deployment safety",
+    ],
+    techNotes: [
+      ["JavaScript", "Chat page and agent logic, with no frameworks"],
+      ["Node.js", "Small server that runs the agent loop and keeps the API key secret"],
+      ["Anthropic API", "Language model that decides when to call a tool"],
+      ["Vercel", "Hosting and deployment"],
+    ],
+    why: "Demonstrates the ability to build and explain an AI agent from first principles, including tool calling, secure API key handling and the risks of exposing a public endpoint.",
+  },
   {
     id: "biatoben",
     category: "Classifieds marketplace",
