@@ -23,6 +23,14 @@ export const PROFILE = {
   ],
 };
 
+// Key numbers shown in a strip under the hero. Each entry is [value, label]. Keep every number one you can explain.
+export const STATS = [
+  ["4+ yrs", "building and running production software"],
+  ["10,000+", "Android downloads of Iwolonet"],
+  ["1,000+", "users on the billing and stock apps I built"],
+  ["−20%", "critical errors after automated testing"],
+];
+
 // The two halves of the work, shown in the "What I do" section.
 export const SERVICES = [
   {
