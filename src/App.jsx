@@ -2,12 +2,14 @@
 // v4: @custom-variant dark (&:where(.dark, .dark *));).
 import React, { useState, useEffect } from "react";
 import { useStore } from "./store/useStore";
-import { PROFILE, SKILLS, PROJECTS, EXPERIENCE, FEATURED, SPOTLIGHT, SERVICES } from "./data/content";
+import { PROFILE, SKILLS, PROJECTS, EXPERIENCE, FEATURED, SPOTLIGHT, SERVICES, STATS, TERMINAL } from "./data/content";
 import FeaturedProject from "./components/FeaturedProject";
 import { Code2, Cloud } from "lucide-react";
 import { focus, linkCls, primaryBtn, outlineBtn } from "./lib/styles";
 import { Tag, Section } from "./components/ui";
-import ProjectCarousel from "./components/ProjectCarousel";
+import ProjectGrid from "./components/ProjectGrid";
+import Terminal from "./components/Terminal";
+import Reveal from "./components/Reveal";
 import ExperienceList from "./components/ExperienceList";
 import AddProjectForm from "./components/AddProjectForm";
 import BlogPage from "./components/BlogPage";
@@ -118,7 +120,7 @@ export default function App() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-stone-50 font-sans text-base leading-relaxed text-stone-800 antialiased dark:bg-stone-950 dark:text-stone-300">
+    <div className="flex min-h-screen flex-col overflow-x-clip bg-stone-50 font-sans text-base leading-relaxed text-stone-800 antialiased dark:bg-stone-950 dark:text-stone-300">
       <header className="sticky top-0 z-10 border-b border-stone-200 bg-stone-50/90 backdrop-blur dark:border-stone-800 dark:bg-stone-950/90">
         <nav className="mx-auto flex max-w-3xl lg:max-w-4xl items-center justify-between gap-3 px-5 py-3">
           <a
@@ -180,13 +182,26 @@ export default function App() {
           <ProjectPage id={slug} />
         ) : (
           <>
-            <div className="grid gap-12 pb-16 pt-14 sm:pb-24 sm:pt-20 md:grid-cols-[minmax(0,1fr)_16rem] md:items-end md:gap-10">
+            <div className="relative isolate grid gap-12 pb-16 pt-14 sm:pb-24 sm:pt-20 md:grid-cols-[minmax(0,1fr)_19rem] md:items-center md:gap-10">
+              {/* Decorative backdrop: a faint dot grid with teal (build) and sky (run) glows. */}
+              <div aria-hidden="true" className="pointer-events-none absolute -inset-x-40 -top-16 bottom-0 -z-10 overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(120,113,108,0.18)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)] dark:bg-[radial-gradient(circle,rgba(168,162,158,0.12)_1px,transparent_1px)]" />
+                <div className="absolute left-[18%] top-10 h-72 w-72 rounded-full bg-teal-400/20 blur-3xl dark:bg-teal-500/15" />
+                <div className="absolute right-[15%] top-40 h-72 w-72 rounded-full bg-sky-400/20 blur-3xl dark:bg-sky-500/15" />
+              </div>
               <div>
-                {PROFILE.location && (
-                  <p className="text-sm text-stone-600 dark:text-stone-400">
-                    Based in {PROFILE.location}
-                  </p>
-                )}
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-stone-600 dark:text-stone-400">
+                  {PROFILE.status && (
+                    <span className="inline-flex items-center gap-2 rounded-full border border-emerald-600/30 bg-emerald-50 px-3 py-1 font-medium text-emerald-800 dark:border-emerald-400/30 dark:bg-emerald-950/50 dark:text-emerald-200">
+                      <span className="relative flex h-2 w-2" aria-hidden="true">
+                        <span className="soft-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500" />
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                      </span>
+                      {PROFILE.status}
+                    </span>
+                  )}
+                  {PROFILE.location && <span>Based in {PROFILE.location}</span>}
+                </div>
                 <h1 className="wordmark mt-6 text-7xl font-extrabold text-stone-900 sm:text-8xl lg:text-[8.5rem] dark:text-stone-50">
                   {PROFILE.name.split(" ").map((w) => (
                     <span key={w} className="block">{w}</span>
@@ -228,6 +243,8 @@ export default function App() {
                 </div>
               </div>
 
+              <div className="space-y-6">
+              {TERMINAL?.length > 0 && <Terminal script={TERMINAL} />}
               <dl className="border-t-2 border-teal-600 text-sm dark:border-teal-400">
                 {PROFILE.facts.map(([k, v]) => (
                   <div key={k} className="border-b border-stone-200 py-3 dark:border-stone-800">
@@ -249,9 +266,30 @@ export default function App() {
                   </dd>
                 </div>
               </dl>
+              </div>
             </div>
 
-            <Section id="services" title="What I do">
+            {STATS.length > 0 && (
+              <Reveal as="ul" className="-mt-4 mb-16 grid grid-cols-2 overflow-hidden rounded-xl border border-stone-200 bg-white sm:grid-cols-4 dark:border-stone-800 dark:bg-stone-900">
+                {STATS.map(([value, label], i) => (
+                  <li
+                    key={label}
+                    className={
+                      "p-5 " +
+                      (i % 2 === 1 ? "border-l " : "") +
+                      (i >= 2 ? "border-t sm:border-t-0 " : "") +
+                      (i === 2 ? "sm:border-l " : "") +
+                      "border-stone-200 dark:border-stone-800"
+                    }
+                  >
+                    <p className="text-2xl font-extrabold tracking-tight text-stone-900 sm:text-3xl dark:text-stone-50">{value}</p>
+                    <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">{label}</p>
+                  </li>
+                ))}
+              </Reveal>
+            )}
+
+            <Section id="services" title="What I do" eyebrow="01 · Services">
               <div className="grid gap-5 md:grid-cols-2">
                 {SERVICES.map((s, i) => {
                   const Icon = SERVICE_ICONS[i] || Code2;
@@ -259,7 +297,7 @@ export default function App() {
                   <article
                     key={s.title}
                     className={
-                      "rounded-xl border bg-white p-6 dark:bg-stone-900 " +
+                      "rounded-xl border bg-white p-6 transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-stone-900/5 motion-reduce:transform-none dark:bg-stone-900 dark:hover:shadow-black/30 " +
                       (i === 0
                         ? "border-stone-200 border-t-4 border-t-teal-600 dark:border-stone-800 dark:border-t-teal-400"
                         : "border-stone-200 border-t-4 border-t-sky-600 dark:border-stone-800 dark:border-t-sky-400")
@@ -296,18 +334,18 @@ export default function App() {
               </div>
             </Section>
 
-            <Section id="projects" title="Projects">
+            <Section id="projects" title="Projects" eyebrow="02 · Work">
               {spotlight.length > 0 && (
                 <div className="mb-14 grid gap-6 md:grid-cols-2">
                   {spotlight.map((p, i) => (
-                    <div key={p.id} className={i === 0 ? "md:col-span-2" : ""}>
+                    <div key={p.id} className={i === 0 ? "md:col-span-2" : "h-full"}>
                       <FeaturedProject project={p} lead={i === 0} />
                     </div>
                   ))}
                 </div>
               )}
-              <h3 className="mb-2 text-lg font-semibold text-stone-900 dark:text-stone-50">More projects</h3>
-              <ProjectCarousel projects={rest} onRemove={removeProject} label="More projects" />
+              <h3 className="mb-4 text-lg font-semibold text-stone-900 dark:text-stone-50">More projects</h3>
+              <ProjectGrid projects={rest} onRemove={removeProject} />
               {saveError && (
                 <p role="alert" className="mt-4 text-sm text-red-600 dark:text-red-400">
                   This browser could not save your changes, so they will
@@ -324,11 +362,11 @@ export default function App() {
                 ))}
             </Section>
 
-            <Section id="experience" title="Experience">
+            <Section id="experience" title="Experience" eyebrow="03 · Career">
               <ExperienceList jobs={EXPERIENCE} />
             </Section>
 
-            <Section id="skills" title="Skills">
+            <Section id="skills" title="Skills" eyebrow="04 · Toolbox">
               <dl className="grid gap-4 sm:grid-cols-[9.5rem_1fr] sm:gap-x-6">
                 {SKILLS.map(([k, v]) => (
                   <React.Fragment key={k}>
@@ -355,7 +393,7 @@ export default function App() {
               </dl>
             </Section>
 
-            <Section id="contact" title="Contact">
+            <Section id="contact" title="Contact" eyebrow="05 · Say hello">
               <p className="text-stone-600 dark:text-stone-400">
                 {PROFILE.location ? "I am based in " + PROFILE.location + ". " : ""}
                 Write to me at{" "}

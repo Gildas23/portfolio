@@ -3,6 +3,7 @@
 
 @theme {
   --font-sans: "Bricolage Grotesque", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 /* The name in the hero uses Bricolage's narrow width for a tall, compact wordmark. */
@@ -10,4 +11,38 @@
   font-variation-settings: "wdth" 80, "opsz" 96;
   letter-spacing: -0.02em;
   line-height: 0.88;
+}
+
+/* Scroll reveal: elements start slightly lower and transparent, then settle in.
+   The "is-visible" class is added by the Reveal component when the element enters the screen. */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Blinking terminal cursor. */
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+.caret {
+  animation: caret-blink 1s step-end infinite;
+}
+
+/* Gentle pulse for the availability dot. */
+@keyframes soft-ping {
+  75%, 100% { transform: scale(2.2); opacity: 0; }
+}
+.soft-ping {
+  animation: soft-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* People who ask their device for less motion get the finished state straight away. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .caret, .soft-ping { animation: none; }
 }

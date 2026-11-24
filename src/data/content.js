@@ -1,7 +1,9 @@
 /* ============ EDIT YOUR CONTENT HERE ============ */
 export const PROFILE = {
   name: "Gildas Chatue",
-  title: "Full-stack Developer & Cloud Engineer",
+  title: "Full-stack Developer · Cloud & DevOps",
+  // Availability shown as a small badge above the name. Leave empty to hide it.
+  status: "Open to new roles in Ottawa",
   // Two short role badges shown under the title.
   roles: ["Full-stack development", "Cloud & infrastructure"],
   location: "Ottawa, Canada",
@@ -20,8 +22,17 @@ export const PROFILE = {
     ["Build", "React, Node.js, Java, C#/.NET, PostgreSQL"],
     ["Run", "AWS, Docker, Kubernetes, Proxmox, Linux"],
     ["Languages", "English and French"],
+    ["Certification", "AWS exam scheduled for December 2026"],
   ],
 };
+
+// The animated terminal in the hero. Each step types a command, then shows its output.
+export const TERMINAL = [
+  { cmd: "kubectl get pods -n billing", out: ["NAME             READY   STATUS", "billing-api-7d9f 1/1     Running", "crm-web-5c2a     1/1     Running"] },
+  { cmd: "docker build -t billing-api .", out: ["✓ image built: billing-api:latest"] },
+  { cmd: "dotnet test", out: ["✓ Passed: all tests green"] },
+  { cmd: "git push origin main", out: ["✓ GitHub Actions: build, test, deploy"] },
+];
 
 // Key numbers shown in a strip under the hero. Each entry is [value, label]. Keep every number one you can explain.
 export const STATS = [
@@ -243,7 +254,7 @@ export const PROJECTS = [
     glyph: "◐",
     stack: ["Proxmox", "Kubernetes", "Docker", "AWS", "Linux", "PostgreSQL", "MySQL"],
     link: null,
-    thumb: "/projects/thumbnails/docker.gif",
+    thumb: "/projects/thumbnails/platform-diagram.svg",
     status: "Production operations",
     role: "Full-stack Software Developer, Bloosat SA",
     overview:
@@ -276,7 +287,7 @@ export const PROJECTS = [
     glyph: "C#",
     stack: ["C#", ".NET", "ASP.NET Core", "OAuth 2.0", "Docker", "Kubernetes"],
     link: null,
-    thumb: "",
+    thumb: "/projects/thumbnails/dotnet-diagram.svg",
     status: "Employer work, no public link",
     role: "Full-stack Software Developer, Bloosat SA",
     overview:
@@ -305,7 +316,7 @@ export const PROJECTS = [
     glyph: "⚖",
     stack: ["C", "C++", "PIC", "Arduino", "ESP32", "REST API"],
     link: null,
-    thumb: "",
+    thumb: "/projects/thumbnails/weighing-diagram.svg",
     status: "Client work, no public link",
     role: "Full-stack Software Developer, A2I Sarl",
     overview:

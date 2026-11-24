@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useStore } from "../store/useStore";
 import { linkCls, quietBtn, primaryBtn, outlineBtn } from "../lib/styles";
+import Reveal from "./Reveal";
 
 export const Tag = ({ children }) => (
   <span className="rounded-md border border-stone-200 bg-white px-2 py-0.5 text-xs text-stone-700 shadow-[0_1px_0_rgba(0,0,0,0.03)] dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300">{children}</span>
@@ -22,7 +23,7 @@ export const Section = ({ id, title, eyebrow, children }) => (
       </p>
     )}
     <h2 className="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl dark:text-stone-50">{title}</h2>
-    <div className="mt-8">{children}</div>
+    <Reveal className="mt-8">{children}</Reveal>
   </section>
 );
 

@@ -9,7 +9,7 @@ export default function FeaturedProject({ project: p, lead }) {
   return (
     <article
       className={
-        "group relative overflow-hidden rounded-xl border border-stone-200 bg-white transition-colors hover:border-teal-600 focus-within:border-teal-600 dark:border-stone-800 dark:bg-stone-900 dark:hover:border-teal-400 " +
+        "group relative overflow-hidden rounded-xl border border-stone-200 bg-white transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-stone-900/5 motion-reduce:transform-none hover:border-teal-600 focus-within:border-teal-600 dark:border-stone-800 dark:bg-stone-900 dark:hover:border-teal-400 " +
         (lead ? "md:grid md:grid-cols-[3fr_2fr]" : "flex h-full flex-col")
       }
     >
