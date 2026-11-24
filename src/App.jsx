@@ -190,19 +190,7 @@ export default function App() {
                 <div className="absolute right-[15%] top-40 h-72 w-72 rounded-full bg-sky-400/20 blur-3xl dark:bg-sky-500/15" />
               </div>
               <div>
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-stone-600 dark:text-stone-400">
-                  {PROFILE.status && (
-                    <span className="inline-flex items-center gap-2 rounded-full border border-emerald-600/30 bg-emerald-50 px-3 py-1 font-medium text-emerald-800 dark:border-emerald-400/30 dark:bg-emerald-950/50 dark:text-emerald-200">
-                      <span className="relative flex h-2 w-2" aria-hidden="true">
-                        <span className="soft-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500" />
-                        <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                      </span>
-                      {PROFILE.status}
-                    </span>
-                  )}
-                  {PROFILE.location && <span>Based in {PROFILE.location}</span>}
-                </div>
-                <h1 className="wordmark mt-6 text-7xl font-extrabold text-stone-900 sm:text-8xl lg:text-[8.5rem] dark:text-stone-50">
+                <h1 className="wordmark text-7xl font-extrabold text-stone-900 sm:text-8xl lg:text-[8.5rem] dark:text-stone-50">
                   {PROFILE.name.split(" ").map((w) => (
                     <span key={w} className="block">{w}</span>
                   ))}
