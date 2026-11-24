@@ -2,7 +2,9 @@
 // v4: @custom-variant dark (&:where(.dark, .dark *));).
 import React, { useState, useEffect } from "react";
 import { useStore } from "./store/useStore";
-import { PROFILE, SKILLS, PROJECTS, EXPERIENCE, FEATURED } from "./data/content";
+import { PROFILE, SKILLS, PROJECTS, EXPERIENCE, FEATURED, SPOTLIGHT, SERVICES } from "./data/content";
+import FeaturedProject from "./components/FeaturedProject";
+import { Code2, Cloud } from "lucide-react";
 import { focus, linkCls, primaryBtn, outlineBtn } from "./lib/styles";
 import { Tag, Section } from "./components/ui";
 import ProjectCarousel from "./components/ProjectCarousel";
@@ -14,7 +16,27 @@ import ProjectPage from "./components/ProjectPage";
 import { parseHash } from "./lib/utils";
 import ThemeToggle from "./components/ThemeToggle";
 
+// Split "a, b (c, d), e" on top-level commas only, so "AWS (EC2, VPC)" stays one tag.
+const splitSkills = (s) => {
+  const out = [];
+  let depth = 0;
+  let cur = "";
+  for (const ch of s) {
+    if (ch === "(") depth++;
+    if (ch === ")") depth--;
+    if (ch === "," && depth === 0) {
+      out.push(cur.trim());
+      cur = "";
+    } else cur += ch;
+  }
+  if (cur.trim()) out.push(cur.trim());
+  return out;
+};
+
+const SERVICE_ICONS = [Code2, Cloud];
+
 const NAV = [
+  ["What I do", "services"],
   ["Projects", "projects"],
   ["Experience", "experience"],
   ["Blog", "blog"],
@@ -45,6 +67,8 @@ export default function App() {
 
   const all = [...PROJECTS, ...saved];
   const featured = FEATURED.map((id) => all.find((p) => p.id === id)).filter(Boolean);
+  const spotlight = SPOTLIGHT.map((id) => all.find((p) => p.id === id)).filter(Boolean);
+  const rest = all.filter((p) => !SPOTLIGHT.includes(p.id));
 
   // Alt+N shows or hides the owner tools (add project, add post, remove, copy as code).
   useEffect(() => {
@@ -110,13 +134,15 @@ export default function App() {
           >
             Gildas Chatue
           </a>
-          <ul className="flex gap-4 text-sm sm:gap-6">
+          <ul className="flex gap-3 whitespace-nowrap text-sm sm:gap-6">
             {NAV.map(([label, id]) => {
+              // "What I do" sits right under the hero, so phones skip it to keep the bar on one line.
+              const hideOnPhone = id === "services";
               const current =
                 (id === "blog" && (view === "blog" || view === "post")) ||
                 (id === "projects" && view === "project");
               return (
-                <li key={id}>
+                <li key={id} className={hideOnPhone ? "hidden sm:block" : undefined}>
                   <a
                     href={"#" + id}
                     onClick={(e) => {
@@ -169,6 +195,23 @@ export default function App() {
                 <p className="mt-6 text-2xl font-semibold tracking-tight text-teal-700 dark:text-teal-300">
                   {PROFILE.title}
                 </p>
+                {PROFILE.roles?.length > 0 && (
+                  <ul className="mt-3 flex flex-wrap gap-2 text-sm">
+                    {PROFILE.roles.map((r, i) => (
+                      <li
+                        key={r}
+                        className={
+                          "rounded-full border px-3 py-1 font-medium " +
+                          (i === 0
+                            ? "border-teal-600/40 bg-teal-50 text-teal-800 dark:border-teal-400/40 dark:bg-teal-950/60 dark:text-teal-200"
+                            : "border-sky-600/40 bg-sky-50 text-sky-800 dark:border-sky-400/40 dark:bg-sky-950/60 dark:text-sky-200")
+                        }
+                      >
+                        {r}
+                      </li>
+                    ))}
+                  </ul>
+                )}
                 <p className="mt-3 max-w-lg text-lg text-stone-600 dark:text-stone-400">
                   {PROFILE.summary}
                 </p>
@@ -208,8 +251,63 @@ export default function App() {
               </dl>
             </div>
 
+            <Section id="services" title="What I do">
+              <div className="grid gap-5 md:grid-cols-2">
+                {SERVICES.map((s, i) => {
+                  const Icon = SERVICE_ICONS[i] || Code2;
+                  return (
+                  <article
+                    key={s.title}
+                    className={
+                      "rounded-xl border bg-white p-6 dark:bg-stone-900 " +
+                      (i === 0
+                        ? "border-stone-200 border-t-4 border-t-teal-600 dark:border-stone-800 dark:border-t-teal-400"
+                        : "border-stone-200 border-t-4 border-t-sky-600 dark:border-stone-800 dark:border-t-sky-400")
+                    }
+                  >
+                    <div className="flex items-center gap-3">
+                      <span
+                        aria-hidden="true"
+                        className={
+                          "flex h-10 w-10 items-center justify-center rounded-lg font-mono text-sm font-bold " +
+                          (i === 0
+                            ? "bg-teal-50 text-teal-700 dark:bg-teal-950 dark:text-teal-300"
+                            : "bg-sky-50 text-sky-700 dark:bg-sky-950 dark:text-sky-300")
+                        }
+                      >
+                        <Icon className="h-5 w-5" />
+                      </span>
+                      <h3 className="text-xl font-bold tracking-tight text-stone-900 dark:text-stone-50">{s.title}</h3>
+                    </div>
+                    <p className="mt-4 text-stone-600 dark:text-stone-400">{s.text}</p>
+                    <ul className="mt-4 space-y-2 text-sm text-stone-700 dark:text-stone-300">
+                      {s.points.map((pt) => (
+                        <li key={pt} className="flex gap-2">
+                          <span aria-hidden="true" className={i === 0 ? "text-teal-600 dark:text-teal-400" : "text-sky-600 dark:text-sky-400"}>
+                            ▸
+                          </span>
+                          {pt}
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                  );
+                })}
+              </div>
+            </Section>
+
             <Section id="projects" title="Projects">
-              <ProjectCarousel projects={all} onRemove={removeProject} />
+              {spotlight.length > 0 && (
+                <div className="mb-14 grid gap-6 md:grid-cols-2">
+                  {spotlight.map((p, i) => (
+                    <div key={p.id} className={i === 0 ? "md:col-span-2" : ""}>
+                      <FeaturedProject project={p} lead={i === 0} />
+                    </div>
+                  ))}
+                </div>
+              )}
+              <h3 className="mb-2 text-lg font-semibold text-stone-900 dark:text-stone-50">More projects</h3>
+              <ProjectCarousel projects={rest} onRemove={removeProject} label="More projects" />
               {saveError && (
                 <p role="alert" className="mt-4 text-sm text-red-600 dark:text-red-400">
                   This browser could not save your changes, so they will
@@ -238,17 +336,23 @@ export default function App() {
                       {k}
                     </dt>
                     <dd className="flex flex-wrap gap-1.5">
-                      {v.split(", ").map((t) => (
+                      {splitSkills(v).map((t) => (
                         <Tag key={t}>{t}</Tag>
                       ))}
                     </dd>
                   </React.Fragment>
                 ))}
               </dl>
-              <p className="mt-8 text-stone-600 dark:text-stone-400">
-                Education: Bachelor of Science in Software Engineering, The ICT
-                University (2023). Languages: English and French (C1).
-              </p>
+              <dl className="mt-10 grid gap-4 border-t border-stone-200 pt-6 text-sm sm:grid-cols-2 dark:border-stone-800">
+                <div>
+                  <dt className="font-medium text-stone-900 dark:text-stone-50">Education</dt>
+                  <dd className="mt-1 text-stone-600 dark:text-stone-400">{PROFILE.education}</dd>
+                </div>
+                <div>
+                  <dt className="font-medium text-stone-900 dark:text-stone-50">Languages</dt>
+                  <dd className="mt-1 text-stone-600 dark:text-stone-400">{PROFILE.languages}</dd>
+                </div>
+              </dl>
             </Section>
 
             <Section id="contact" title="Contact">
@@ -263,13 +367,34 @@ export default function App() {
                 </a>
                 . {PROFILE.contactNote}
               </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a href={"mailto:" + PROFILE.email} className={primaryBtn}>
+                  Email me
+                </a>
+                <a href={PROFILE.linkedin} target="_blank" rel="noreferrer" className={outlineBtn}>
+                  LinkedIn
+                </a>
+                <a href={PROFILE.github} target="_blank" rel="noreferrer" className={outlineBtn}>
+                  GitHub
+                </a>
+              </div>
             </Section>
           </>
         )}
       </main>
 
-      <footer className="mx-auto w-full max-w-3xl px-5 lg:max-w-4xl py-10 text-sm text-stone-500 dark:text-stone-500">
-        {PROFILE.name}
+      <footer className="border-t border-stone-200 dark:border-stone-800">
+        <div className="mx-auto flex w-full max-w-3xl flex-wrap items-center justify-between gap-3 px-5 py-8 text-sm text-stone-500 lg:max-w-4xl dark:text-stone-500">
+          <p>
+            {PROFILE.name} · {PROFILE.title}
+            {PROFILE.location ? " · " + PROFILE.location : ""}
+          </p>
+          <p className="flex gap-4">
+            <a href={PROFILE.github} target="_blank" rel="noreferrer" className={"hover:text-teal-700 dark:hover:text-teal-300 " + focus}>GitHub</a>
+            <a href={PROFILE.linkedin} target="_blank" rel="noreferrer" className={"hover:text-teal-700 dark:hover:text-teal-300 " + focus}>LinkedIn</a>
+            <a href={"mailto:" + PROFILE.email} className={"hover:text-teal-700 dark:hover:text-teal-300 " + focus}>Email</a>
+          </p>
+        </div>
       </footer>
       {editMode && (
         <p

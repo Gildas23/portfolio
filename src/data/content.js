@@ -1,34 +1,69 @@
 /* ============ EDIT YOUR CONTENT HERE ============ */
 export const PROFILE = {
   name: "Gildas Chatue",
-  title: "Full-stack software Developer",
-  location: "",
+  title: "Full-stack Developer & Cloud Engineer",
+  // Two short role badges shown under the title.
+  roles: ["Full-stack development", "Cloud & infrastructure"],
+  location: "Ottawa, Canada",
+  education: "B.Sc. Software Engineering, University of Buea (2019 – 2023), assessed by WES as equivalent to a Canadian bachelor's degree",
+  languages: "English and French (advanced, spoken and written)",
   email: "gildassob@gmail.com",
   linkedin: "https://www.linkedin.com/in/gildas-chatue",
   github: "https://github.com/Gildas23",
   contactNote: "I am fluent in English and French and welcome inquiries in either language.",
   // contactNoteFr: "Je travaille couramment en français et en anglais, et je réponds volontiers dans l'une ou l'autre langue.",
   summary:
-    "I build web applications and APIs with React, Node.js and Java, ship them to AWS, and stay with them after launch so they keep working for the people who use them.",
+    "I build web applications and APIs with React, Node.js, Java and C#/.NET, then run them in production on Linux, Docker, Kubernetes and AWS. From the database to the screen to the server, and I stay with them after launch.",
   // Shown beside the name in the hero. Each entry is [label, value].
   facts: [
-    ["Experience", "Five years, most recently at Bloosat"],
-    ["Core stack", "React, Node.js, Java, PostgreSQL, AWS"],
+    ["Experience", "4+ years, most recently at Bloosat SA"],
+    ["Build", "React, Node.js, Java, C#/.NET, PostgreSQL"],
+    ["Run", "AWS, Docker, Kubernetes, Proxmox, Linux"],
     ["Languages", "English and French"],
   ],
 };
 
+// The two halves of the work, shown in the "What I do" section.
+export const SERVICES = [
+  {
+    title: "Full-stack development",
+    text: "Web apps and REST APIs built end to end, from data model and API design to a responsive interface, with tests and code review before release.",
+    points: [
+      "React, Angular and TypeScript front ends",
+      "APIs in Node.js, Java/Spring Boot and C#/.NET with OAuth",
+      "PostgreSQL and MySQL schema design and query tuning",
+      "Billing, CRM, marketplace and learning products in production",
+    ],
+  },
+  {
+    title: "Cloud & infrastructure",
+    text: "The platform under the app: containers, clusters, virtualization and pipelines that keep releases fast and services running.",
+    points: [
+      "Docker images deployed to Kubernetes",
+      "Proxmox (KVM/LXC) virtualization on physical servers",
+      "AWS and OVH Cloud deployments on Linux",
+      "GitHub Actions CI/CD, Ansible, monitoring and backups",
+    ],
+  },
+];
+
 // Projects linked in the "Shipped and live" profile fact, in this order.
 export const FEATURED = ["iwolonet", "biatoben", "myeasyprep"];
 
+// Large cards at the top of the Projects section: the first is shown wide, the rest in a row.
+// Pick work that shows both halves: shipped products and the platform behind them.
+export const SPOTLIGHT = ["iwolonet", "myeasyprep", "server-infrastructure"];
+
 export const SKILLS = [
   ["Front-end", "React, Next.js, Angular, TypeScript, JavaScript, Tailwind CSS, HTML5, CSS3"],
-  ["Back-end", "Node.js, Express, Java/Spring Boot, PHP, Python, REST APIs, third-party API integration, real-time services"],
+  ["Back-end", "C#, .NET, ASP.NET Core, Node.js, Express, Java/Spring Boot, PHP, Python, REST APIs, OAuth 2.0, third-party API integration, real-time services"],
   ["Databases", "PostgreSQL, MySQL, MongoDB, SQL, schema design, query optimization, database administration"],
-  ["Cloud and DevOps", "AWS, OVH Cloud, Docker, GitHub Actions CI/CD, Linux, logging and monitoring, backup automation"],
-  ["Infrastructure", "Server infrastructure, VMware, VirtualBox"],
-  ["Automation and AI", "Python scripting, billing automation, OpenAI API, Gemini API"],
-  ["Practices", "Git, code reviews, testing, mentoring"],
+  ["Cloud", "AWS (EC2, VPC, IAM, S3, EBS, RDS, Lambda, ECS/EKS, ELB, Route 53, CloudWatch), OVH Cloud"],
+  ["DevOps", "Docker, Kubernetes, GitHub Actions CI/CD, Ansible, logging and monitoring, backup automation"],
+  ["Infrastructure", "Linux administration, Proxmox VE (KVM, LXC), VMware, VirtualBox, VLANs and network troubleshooting, RAID and NAS storage"],
+  ["Embedded", "C, C++, PIC, Arduino, ESP32, UART, I2C, SPI, sensor integration"],
+  ["Automation and AI", "Python scripting, billing automation, OpenAI API, Gemini API, AI agents"],
+  ["Practices", "Git, code reviews, automated testing, Playwright, Agile/Scrum, Jira, mentoring"],
 ];
 
 // Permanent projects. Thumbnails live in public/projects/thumbnails/.
@@ -192,33 +227,96 @@ export const PROJECTS = [
   },
   {
     id: "server-infrastructure",
-    category: "Infrastructure",
-    title: "Server Infrastructure and Database Administration",
+    category: "Cloud and infrastructure",
+    title: "Production Platform: Proxmox, Kubernetes and AWS",
     description:
-      "Managed and optimized high-volume MySQL and PostgreSQL databases, server infrastructure and third-party API integrations across multiple production environments.",
+      "Ran the platform behind Bloosat's applications: Proxmox virtualization on physical servers, containerized services on Kubernetes, AWS and OVH Cloud deployments, and the databases underneath.",
     gradient: "g5",
     glyph: "◐",
-    stack: ["PostgreSQL", "MySQL", "Docker", "VMware", "VirtualBox"],
+    stack: ["Proxmox", "Kubernetes", "Docker", "AWS", "Linux", "PostgreSQL", "MySQL"],
     link: null,
     thumb: "/projects/thumbnails/docker.gif",
     status: "Production operations",
-    role: "",
+    role: "Full-stack Software Developer, Bloosat SA",
     overview:
-      "Day-to-day management and optimization of high-volume MySQL and PostgreSQL databases and the servers they run on, along with third-party API integrations, across multiple production environments.",
+      "Day-to-day operation of the infrastructure that Bloosat's billing, CRM and customer systems run on. Virtual machines and LXC containers on Proxmox hosts provide the environments; services are packaged as Docker images and deployed to Kubernetes; releases ship through GitHub Actions to AWS and OVH Cloud.\n\nUnderneath sit high-volume MySQL and PostgreSQL databases that I managed and tuned, with logging, monitoring and automated backups to catch problems early.",
     highlights: [
-      "Database management and optimization",
-      "Server infrastructure",
-      "Third-party API integrations",
-      "Multiple production environments",
+      "Proxmox VE hosts running VMs and LXC containers, with bridges, VLANs, storage and backups",
+      "Kubernetes Deployments, Services, ConfigMaps and health probes; debugging failed pods and rollouts",
+      "Linux server administration: systemd, SSH, shell scripting, logs and permissions",
+      "GitHub Actions pipelines that build images, run tests and deploy",
+      "MySQL and PostgreSQL management and query optimization",
+      "Logging, monitoring and automated backups",
     ],
     techNotes: [
-      ["PostgreSQL", "Relational data storage"],
-      ["MySQL", "Relational data storage"],
-      ["Docker", "Containerized deployments"],
-      ["VMware", "Virtual machines for environments"],
-      ["VirtualBox", "Virtual machines for development and testing"],
+      ["Proxmox VE", "KVM virtual machines and LXC containers on physical servers"],
+      ["Kubernetes", "Runs the containerized services"],
+      ["Docker", "Packages each service as an image"],
+      ["AWS and OVH Cloud", "Cloud hosting for production deployments"],
+      ["GitHub Actions", "Builds, tests and deploys on every release"],
+      ["PostgreSQL and MySQL", "Relational data storage"],
     ],
-    why: "Demonstrates the ability to operate the systems behind an application as well as write the code on top of them.",
+    why: "Demonstrates the ability to run the systems behind an application as well as write the code on top of them.",
+  },
+  {
+    id: "dotnet-secure-apis",
+    category: "Back-end APIs",
+    title: "Secure .NET APIs on Kubernetes",
+    description:
+      "Fast, secure back-end REST APIs in C# and ASP.NET Core with OAuth integration, packaged as Docker images and deployed to Kubernetes.",
+    gradient: "g6",
+    glyph: "C#",
+    stack: ["C#", ".NET", "ASP.NET Core", "OAuth 2.0", "Docker", "Kubernetes"],
+    link: null,
+    thumb: "",
+    status: "Employer work, no public link",
+    role: "Full-stack Software Developer, Bloosat SA",
+    overview:
+      "Back-end services written in C# on .NET, exposing REST APIs to the company's applications. Each API integrates OAuth for authentication and authorization.\n\nThe services ship as Docker images and run as pods on Kubernetes, so they deploy the same way as the rest of the platform.",
+    highlights: [
+      "REST APIs in C# with ASP.NET Core",
+      "OAuth integration for secure access",
+      "Packaged as Docker images",
+      "Deployed and run on Kubernetes",
+    ],
+    techNotes: [
+      ["C# and .NET", "API implementation"],
+      ["OAuth 2.0", "Authentication and authorization"],
+      ["Docker", "Container images for each service"],
+      ["Kubernetes", "Runs the services in production"],
+    ],
+    why: "Shows the full path for a back-end service: secure code, a container image and a production cluster.",
+  },
+  {
+    id: "weighing-station-firmware",
+    category: "Embedded and IoT",
+    title: "Road Weighing Station Devices",
+    description:
+      "C/C++ firmware and REST APIs that let microcontrollers in road weighing stations read load-cell sensors and report measurements to central systems.",
+    gradient: "g3",
+    glyph: "⚖",
+    stack: ["C", "C++", "PIC", "Arduino", "ESP32", "REST API"],
+    link: null,
+    thumb: "",
+    status: "Client work, no public link",
+    role: "Full-stack Software Developer, A2I Sarl",
+    overview:
+      "A2I builds road weighing stations, speed cameras and electronic breathalyzers. I wrote firmware for the microcontrollers inside the weighing stations and the APIs that connect them to the rest of the system.\n\nThe devices read load-cell sensors through ADCs, send measurements over UART, I2C, SPI and Wi-Fi, and expose them through REST APIs to backend systems and displays. A mobile app controls the devices over Wi-Fi.",
+    highlights: [
+      "C/C++ firmware for PIC, Arduino and ESP32 microcontrollers",
+      "Load-cell sensor readings through ADCs",
+      "Communication over UART, I2C, SPI and Wi-Fi",
+      "REST APIs that report field measurements to central systems",
+      "Mobile app that controls the devices over Wi-Fi",
+      "On-site and remote debugging of firmware, wiring and network faults",
+    ],
+    techNotes: [
+      ["C and C++", "Microcontroller firmware"],
+      ["PIC, Arduino, ESP32", "Device hardware"],
+      ["UART, I2C, SPI, Wi-Fi", "Sensor and device communication"],
+      ["REST API", "Connects devices to backend systems"],
+    ],
+    why: "Shows comfort below the web stack: firmware, sensors and protocols, connected all the way up to an API.",
   },
   {
     id: "photonet-shop",
@@ -471,13 +569,18 @@ export const EXPERIENCE = [
       "Diagnosed and resolved production issues across services and databases.",
     ],
     achievements: [
+      { area: "Back-end", text: "Built fast, secure REST APIs in C# and .NET with OAuth integration, packaged them as Docker images and deployed them to Kubernetes." },
       { area: "Back-end", text: "Designed, built and tested a customer management API platform (Node.js, PHP, Java/Spring Boot) that runs production business workflows and third-party integrations." },
+      { area: "Cloud", text: "Ran Proxmox VE hosts with VMs and LXC containers, including virtual networking (bridges, VLANs), storage and backups." },
+      { area: "Cloud", text: "Operated containerized services on Kubernetes: Deployments, Services, ConfigMaps and health probes, and debugging failed pods and rollouts." },
       { area: "Full stack", text: "Delivered a CRM platform that lets the company monitor and manage customer records at scale, with automated billing and dynamic email scheduling." },
+      { area: "Database", text: "Optimized MySQL schemas and queries behind the billing, invoicing and stock modules used by 1,000+ users, including a query cut from 10 seconds to 3." },
+      { area: "DevOps", text: "Built GitHub Actions CI/CD pipelines that build images, run automated tests and deploy to AWS and OVH Cloud, reducing release time." },
+      { area: "Infrastructure", text: "Administered Linux servers (systemd, SSH, shell scripting, logs, permissions) and supported each release after go-live." },
+      { area: "Testing", text: "Automated testing with Playwright and Python; SQL data verification cut critical errors by 20%." },
       { area: "Front-end", text: "Connected back-end APIs to React and Angular front-end features, delivering each feature end to end from database to screen." },
-      { area: "Database", text: "Optimized MySQL schemas and queries behind the billing, invoicing and stock modules used by 1,000+ users." },
-      { area: "Cloud and DevOps", text: "Built GitHub Actions CI/CD pipelines that automate builds, tests and deployments, reducing release time." },
-      { area: "Cloud and DevOps", text: "Ran production deployments on AWS and OVH Cloud and supported each release after go-live." },
-      { area: "Reliability", text: "Added logging and monitoring, plus server monitoring and data backup scripts, to detect problems earlier and reduce manual work." },
+      { area: "Reliability", text: "Added logging, monitoring and data backup scripts to detect problems earlier and reduce manual work." },
+      { area: "Automation", text: "Automated stock-data extraction in Python, turning JSON into Excel reports with email alerts on significant stock changes." },
       { area: "AI", text: "Built a real-time customer service chatbot on the OpenAI and Gemini APIs to reduce response times for the support team." },
       { area: "Leadership", text: "Reviewed code and mentored junior developers until they could own modules independently." },
     ],
@@ -491,9 +594,12 @@ export const EXPERIENCE = [
       "Converted customer requirements into written use cases to plan development and delivery.",
     ],
     achievements: [
+      { area: "Embedded", text: "Wrote C/C++ firmware for PIC, Arduino and ESP32 microcontrollers in road weighing systems, reading load-cell sensors and communicating over UART, I2C, SPI and Wi-Fi." },
+      { area: "Back-end", text: "Built REST APIs that let weighing stations in the field report measurements to central systems, plus a mobile app that controls the devices over Wi-Fi." },
+      { area: "DevOps", text: "Upgraded a legacy Node.js API from Node 8 to 17.2 and redeployed it with Docker, improving responsiveness by up to 30%." },
       { area: "Database", text: "Built a data query module for a personnel management system that cut average response time from 10 seconds to 3 seconds." },
-      { area: "Cloud and DevOps", text: "Upgraded a legacy Node.js API from Node 8 to 17.2 and redeployed it with Docker, improving responsiveness by up to 30%." },
       { area: "Back-end", text: "Contributed to the development and testing of a real-time vehicle tracking web API in Node.js." },
+      { area: "Infrastructure", text: "Resolved software, hardware and network issues on-site and remotely, and ran a Synology NAS with RAID and scheduled backups to AWS." },
       { area: "Front-end", text: "Built reusable React components and hooks, and integrated third-party APIs into the front end and Node.js services." },
     ],
   },
@@ -502,9 +608,6 @@ export const EXPERIENCE = [
     org: "A2I Sarl",
     dates: "Jun 2021 – Sep 2021",
     points: ["Researched emerging web technologies and recommended integrations aligned with business goals."],
-    achievements: [
-      { area: "Database", text: "Automated the extraction of customer stock data from an SQL database." },
-      { area: "Automation", text: "Built a module that converts JSON data into editable Excel spreadsheets and emails users when significant stock changes occur." },
-    ],
+    achievements: [],
   },
 ];
